@@ -1,5 +1,7 @@
 package model.Cmp;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import model.Enum.*;
@@ -15,6 +17,7 @@ public class Atraccion implements Comparable<Atraccion> {
 
 	private final int posicionX;
 	private final int posicionY;
+	private Map<String, String> errors;
 
 	private ENUMTIPO preferencia = ENUMTIPO.SinDefinir;
 
@@ -142,4 +145,27 @@ public class Atraccion implements Comparable<Atraccion> {
 				+ ", posicionY=" + posicionY + ", preferencia=" + preferencia + "]";
 	}
 
+	
+	public boolean isValid() {
+		validate();
+		return errors.isEmpty();
+	}
+	
+	public void validate() {
+		errors = new HashMap<String, String>();
+
+		if (costo <= 0) {
+			errors.put("cost", "Debe ser positivo");
+		}
+		if (duracion <= 0) {
+			errors.put("duration", "Debe ser positivo");
+		}
+		if (cupoMaximo <= 0) {
+			errors.put("capacity", "Debe ser positivo");
+		}
+	}
+	
+	public Map<String, String> getErrors() {
+		return errors;
+	}
 }

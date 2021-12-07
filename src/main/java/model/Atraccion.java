@@ -1,5 +1,7 @@
 package model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import model.Enum.*;
@@ -7,15 +9,16 @@ import model.Enum.*;
 public class Atraccion implements Comparable<Atraccion> {
 
 	private int id;
-	private final String nombre;
-	private final double costo;
-	private final double duracion;
+	private String nombre;
+	private double costo;
+	private double duracion;
 
 	private int cupoActual = 0;
-	private final int cupoMaximo;
+	private int cupoMaximo;
 
 	private final int posicionX;
 	private final int posicionY;
+	private Map<String, String> errors;
 
 	private ENUMTIPO preferencia = ENUMTIPO.SinDefinir;
 
@@ -44,6 +47,8 @@ public class Atraccion implements Comparable<Atraccion> {
 	}
 
 ////////////////////////////////////////////////////////////////////////////////
+
+	
 
 	public int getId() {
 		return id;
@@ -143,4 +148,47 @@ public class Atraccion implements Comparable<Atraccion> {
 				+ ", posicionY=" + posicionY + ", preferencia=" + preferencia + "]";
 	}
 
+	public boolean isValid() {
+		validate();
+		return errors.isEmpty();
+	}
+	
+	public void validate() {
+		errors = new HashMap<String, String>();
+
+		if (costo <= 0) {
+			errors.put("cost", "Debe ser positivo");
+		}
+		if (duracion <= 0) {
+			errors.put("duration", "Debe ser positivo");
+		}
+		if (cupoMaximo <= 0) {
+			errors.put("capacity", "Debe ser positivo");
+		}
+	}
+	
+	public Map<String, String> getErrors() {
+		return errors;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+		
+	}
+
+	public void setCosto(Integer costo) {
+		this.costo = costo;
+		
+	}
+
+	public void setDuracion(Double duracion) {
+		this.duracion = duracion;
+		
+	}
+
+	public void setCupoMaximo(Integer cupoMaximo) {
+		this.cupoMaximo = cupoMaximo;
+	}
+
+	
 }

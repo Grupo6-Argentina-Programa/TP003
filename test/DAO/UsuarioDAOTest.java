@@ -75,7 +75,7 @@ public class UsuarioDAOTest {
 		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
 
 		Usuario hobbitBD = userDAO.findById(1);
-		Usuario hobbitLocal = new Usuario(1, "hobbit1", "aaaa", 12, 10, 1, 1);
+		Usuario hobbitLocal = new Usuario(1, "hobbit1", "aaaa", 12, 10, 1, 1, 0);
 
 		assertTrue(hobbitBD.equals(hobbitLocal));
 	}

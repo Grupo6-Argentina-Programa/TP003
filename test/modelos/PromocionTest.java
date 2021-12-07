@@ -11,7 +11,7 @@ import model.Atraccion;
 import model.Promocion;
 import model.Enum.ENUMTIPO;
 
-public class Promocion2Test {
+public class PromocionTest {
 
 	@Test
 	public void creacionTest() {

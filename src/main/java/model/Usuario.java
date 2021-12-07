@@ -10,9 +10,7 @@ public class Usuario {
 	private int id;
 	private String usuario;
 	private String contrasenia;
-	private double dineroInicial; // combinar
 	private double dineroDisponible;
-	private double tiempoInicial; // combinar
 	private double tiempoDisponible;
 
 	private int posicionX;
@@ -21,6 +19,8 @@ public class Usuario {
 	private int costoTotal = 0;
 	private ENUMTIPO preferencia = ENUMTIPO.SinDefinir;
 	private List<Atraccion> atracciones = new ArrayList<>();
+
+	boolean administrador = false;
 
 	public void setAtracciones(List<Atraccion> atracciones) {
 		this.atracciones = atracciones;
@@ -31,9 +31,7 @@ public class Usuario {
 			int posicionY) {
 		this.usuario = usuario;
 		this.contrasenia = contrasenia;
-		this.dineroInicial = dineroDisponible;
 		this.dineroDisponible = dineroDisponible;
-		this.tiempoInicial = tiempoDisponible;
 		this.tiempoDisponible = tiempoDisponible;
 		this.posicionX = posicionX;
 		this.posicionY = posicionY;
@@ -41,30 +39,20 @@ public class Usuario {
 
 	// CONSTRUCTOR SOLO USADO POR DAO
 	public Usuario(int id, String usuario, String contrasenia, double dineroDisponible, double tiempoDisponible,
-			int posicionX, int posicionY) {
+			int posicionX, int posicionY, int admin) {
 		this.id = id;
 		this.usuario = usuario;
 		this.contrasenia = contrasenia;
-		this.dineroInicial = dineroDisponible;
 		this.dineroDisponible = dineroDisponible;
-		this.tiempoInicial = tiempoDisponible;
 		this.tiempoDisponible = tiempoDisponible;
 		this.posicionX = posicionX;
 		this.posicionY = posicionY;
+		if (admin > 0)
+			this.administrador = true;
 
 	}
 
-	// DEPURAR
-	public Usuario(int DNI, ENUMTIPO tipoFavorito, int dineroInicial, double tiempoDisponible) {
-		this.id = DNI;
-		this.preferencia = tipoFavorito;
-		this.dineroInicial = dineroInicial;
-		this.dineroDisponible = dineroInicial;
-		this.tiempoInicial = tiempoDisponible;
-		this.tiempoDisponible = tiempoDisponible;
-	}
-
-////////////////////////////////////////////////////////////////////////////////
+// Guetters and Setters/////////////////////////////////////////////////////////
 
 	public int getId() {
 		return id;
@@ -85,22 +73,9 @@ public class Usuario {
 	public String getContrasenia() {
 		return contrasenia;
 	}
-	public boolean checkPassword(String contrasenia) {
-		// this.password en realidad es el hash del password
-		return Crypt.match(contrasenia, this.contrasenia);
-	}
-
 
 	public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
-	}
-
-	public double getDineroInicial() {
-		return dineroInicial;
-	}
-
-	public void setDineroInicial(double dineroInicial) {
-		this.dineroInicial = dineroInicial;
 	}
 
 	public double getDineroDisponible() {
@@ -109,14 +84,6 @@ public class Usuario {
 
 	public void setDineroDisponible(double dineroDisponible) {
 		this.dineroDisponible = dineroDisponible;
-	}
-
-	public double getTiempoInicial() {
-		return tiempoInicial;
-	}
-
-	public void setTiempoInicial(double tiempoInicial) {
-		this.tiempoInicial = tiempoInicial;
 	}
 
 	public double getTiempoDisponible() {
@@ -151,19 +118,27 @@ public class Usuario {
 		this.costoTotal = costoTotal;
 	}
 
-	public ENUMTIPO getTipoFavorito() {
+	public ENUMTIPO getPreferencia() {
 		return preferencia;
 	}
 
-	public void setPreferencia(ENUMTIPO tipoFavorito) {
-		this.preferencia = tipoFavorito;
+	public void setPreferencia(ENUMTIPO preferencia) {
+		this.preferencia = preferencia;
+	}
+
+	public boolean isAdministrador() {
+		return administrador;
+	}
+
+	public void setAdministrador(boolean administrador) {
+		this.administrador = administrador;
 	}
 
 	public List<Atraccion> getAtracciones() {
 		return atracciones;
 	}
 
-////////////////////////////////////////////////////////////////////////////////
+// funciones convenientes //////////////////////////////////////////////////////
 
 	public void agregarAtraccion(Atraccion atraccion) {
 		this.atracciones.add(atraccion);
@@ -175,6 +150,17 @@ public class Usuario {
 		}
 	}
 
+	public int isAdministradorInt() {
+		if (this.administrador)
+			return 1;
+		return 0;
+	}
+
+	public boolean checkPassword(String contrasenia) {
+		// this.password en realidad es el hash del password
+		return Crypt.match(contrasenia, this.contrasenia);
+	}
+
 	@SuppressWarnings("unused")
 	private static String ingresarDatoStr() {
 		@SuppressWarnings("resource")
@@ -182,7 +168,7 @@ public class Usuario {
 		return scan.nextLine();
 	}
 
-////////////////////////////////////////////////////////////////////////////////
+// Depurar /////////////////////////////////////////////////////////////////////
 
 	/*
 	 * public void recibirSugerencia(AtraccionSugerida sugerencia) {
@@ -213,6 +199,8 @@ public class Usuario {
 	 * valorOriginal - sugerencia.getTotal(); }
 	 */
 
+// Overrides and comparate /////////////////////////////////////////////////////	
+	
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -231,8 +219,8 @@ public class Usuario {
 	@Override
 	public String toString() {
 		return "Usuario [DNI=" + id + ", usuario=" + usuario + ", contrasenia=" + contrasenia + ", dineroInicial="
-				+ dineroInicial + ", dineroDisponible=" + dineroDisponible + ", tiempoInicial=" + tiempoInicial
-				+ ", tiempoDisponible=" + tiempoDisponible + ", posicionX=" + posicionX + ", posicionY=" + posicionY
-				+ ", costoTotal=" + costoTotal + ", tipoFavorito=" + preferencia + ", atracciones=" + atracciones + "]";
+				+ dineroDisponible + ", tiempoDisponible=" + tiempoDisponible + ", posicionX=" + posicionX
+				+ ", posicionY=" + posicionY + ", costoTotal=" + costoTotal + ", tipoFavorito=" + preferencia
+				+ ", atracciones=" + atracciones + "]";
 	}
 }

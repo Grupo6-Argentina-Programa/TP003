@@ -12,25 +12,23 @@ import persistence.commons.*;
 import model.Usuario;
 import persistence.UsuarioDAO;
 
-@SuppressWarnings("unused")
 public class UsuarioDAOImpl implements UsuarioDAO {
 
 	@Override
 	public int insert(Usuario usuario) {
 		try {
 			String sql = "INSERT INTO Usuario (usuario, contrasenia, dineroDisponible, "
-					+ "tiempoDisponible, posicionX, posicionY, tipoFavorito) VALUES (?, ?, ?, ?, ?, ?, ?)";
+					+ "tiempoDisponible, posicionX, posicionY, administrador) VALUES (?, ?, ?, ?, ?, ?, ?)";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
-			// statement.setInt(1, usuario.getId());
 			statement.setString(1, usuario.getUsuario());
 			statement.setString(2, usuario.getContrasenia());
 			statement.setDouble(3, usuario.getDineroDisponible());
 			statement.setDouble(4, usuario.getTiempoDisponible());
 			statement.setInt(5, usuario.getPosicionX());
 			statement.setInt(6, usuario.getPosicionY());
-			statement.setString(7, usuario.getTipoFavorito().toString());
+			statement.setInt(7, usuario.isAdministradorInt());
 			int rows = statement.executeUpdate();
 
 			return rows;
@@ -43,7 +41,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	public int update(Usuario usuario) {
 		try {
 			String sql = "UPDATE Usuario SET usuario = ?, contrasenia = ?, dineroDisponible = ?,"
-					+ " tiempoDisponible = ?, posicionX = ?, posicionY = ?, tipoFavorito = ? WHERE id = ?";
+					+ " tiempoDisponible = ?, posicionX = ?, posicionY = ?, administrador = ? WHERE id = ?";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
@@ -54,7 +52,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			statement.setDouble(4, usuario.getTiempoDisponible());
 			statement.setInt(5, usuario.getPosicionX());
 			statement.setInt(6, usuario.getPosicionY());
-			statement.setString(7, usuario.getTipoFavorito().toString());
+			statement.setInt(7, usuario.isAdministradorInt());
 			statement.setInt(8, usuario.getId());
 
 			int rows = statement.executeUpdate();
@@ -183,7 +181,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	private Usuario toUsuarios(ResultSet resultados) throws SQLException {
 		return new Usuario(resultados.getInt(1), resultados.getString(2), resultados.getString(3),
-				resultados.getDouble(4), resultados.getDouble(5), resultados.getInt(6), resultados.getInt(7));
+				resultados.getDouble(4), resultados.getDouble(5), resultados.getInt(6), resultados.getInt(7),
+				resultados.getInt(8));
 	}
 
 }

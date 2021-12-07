@@ -50,10 +50,10 @@ public class Sugerencia {
 		return cantidad;
 	}
 
+	@SuppressWarnings("unused")
 	private int cantidadDePromociones() {
 		int cantidad = 0;
-		for (@SuppressWarnings("unused")
-		Promocion i : promociones) {
+		for (Promocion i : promociones) {
 			cantidad++;
 		}
 		return cantidad;

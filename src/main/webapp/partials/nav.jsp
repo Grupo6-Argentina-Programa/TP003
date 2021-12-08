@@ -27,7 +27,7 @@
 							<i title="tiempo" style="color: blue;" class="bi bi-clock-fill"></i> <c:out value="${user.tiempoDisponible}h"></c:out>
 						</a></li>
 						<li><hr class="dropdown-divider"></li>
-						<li><a href="/turismo/logout" class="dropdown-item">Salir</a></li>
+						<li><a href="/TP003/logout" class="dropdown-item">Salir</a></li>
 					</ul>
 				</li>
 			</ul>

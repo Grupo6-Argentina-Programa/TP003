@@ -158,7 +158,7 @@ public class Usuario {
 
 	public boolean checkPassword(String contrasenia) {
 		// this.password en realidad es el hash del password
-		return Crypt.match(contrasenia, this.contrasenia);
+		return (this.contrasenia.equals(contrasenia));
 	}
 
 	@SuppressWarnings("unused")
@@ -222,5 +222,10 @@ public class Usuario {
 				+ dineroDisponible + ", tiempoDisponible=" + tiempoDisponible + ", posicionX=" + posicionX
 				+ ", posicionY=" + posicionY + ", costoTotal=" + costoTotal + ", tipoFavorito=" + preferencia
 				+ ", atracciones=" + atracciones + "]";
+	}
+
+	public boolean isNull() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

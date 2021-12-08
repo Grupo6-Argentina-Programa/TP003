@@ -175,6 +175,13 @@ public class Usuario {
 		Scanner scan = new Scanner(System.in);
 		return scan.nextLine();
 	}
+	
+	
+	public void addToItinerary(Atraccion attraction) {
+		this.dineroDisponible -= attraction.getCosto();
+		this.tiempoDisponible -= attraction.getDuracion();
+		// TODO agregar a su lista
+	}
 
 // Depurar /////////////////////////////////////////////////////////////////////
 

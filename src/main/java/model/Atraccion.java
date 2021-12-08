@@ -16,8 +16,8 @@ public class Atraccion implements Comparable<Atraccion> {
 	private int cupoActual = 0;
 	private int cupoMaximo;
 
-	private final int posicionX;
-	private final int posicionY;
+	private int posicionX;
+	private int posicionY;
 	private Map<String, String> errors;
 
 	private ENUMTIPO preferencia = ENUMTIPO.SinDefinir;
@@ -184,7 +184,7 @@ public class Atraccion implements Comparable<Atraccion> {
 		
 	}
 
-	public void setCosto(Integer costo) {
+	public void setCosto(Double costo) {
 		this.costo = costo;
 		
 	}
@@ -198,5 +198,16 @@ public class Atraccion implements Comparable<Atraccion> {
 		this.cupoMaximo = cupoMaximo;
 	}
 
+	public void setPosicionX(Integer posicionX) {
+		this.posicionX = posicionX;
+		
+	}
+
+	public void setPosicionY(Integer posicionY) {
+		this.posicionY = posicionY;
+		
+	}
+
+	
 	
 }

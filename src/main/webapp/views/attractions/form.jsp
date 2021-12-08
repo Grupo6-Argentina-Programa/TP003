@@ -1,35 +1,60 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="modal-body">
 	<div class="mb-3">
-		<label for="name" class="col-form-label">Nombre:</label> <input
+		<label for="nombre" class="col-form-label">Nombre:</label> <input
 			type="text" class="form-control" id="name" name="name"
-			required value="${attraction.name}">
+			required value="${attraction.nombre}">
 	</div>
 	<div class="mb-3">
-		<label for="cost"
-			class='col-form-label ${attraction.errors.get("cost") != null ? "is-invalid" : "" }'>Costo:</label>
+		<label for="costo"
+			class='col-form-label ${attraction.errors.get("costo") != null ? "is-invalid" : "" }'>Costo:</label>
 		<input class="form-control" type="number" id="cost" name="cost"
-			required value="${attraction.cost}"></input>
+			required value="${attraction.costo}"></input>
 		<div class="invalid-feedback">
 			<c:out value='${attraction.errors.get("cost")}'></c:out>
 		</div>
 	</div>
 	<div class="mb-3">
-		<label for="duration"
-			class='col-form-label ${attraction.errors.get("duration") != null ? "is-invalid" : "" }'>Duration:</label>
+		<label for="duracion"
+			class='col-form-label ${attraction.errors.get("duracion") != null ? "is-invalid" : "" }'>Duracion:</label>
 		<input class="form-control" type="number" id="duration" name="duration"
-			required value="${attraction.duration}"></input>
+			required value="${attraction.duracion}"></input>
 		<div class="invalid-feedback">
-			<c:out value='${attraction.errors.get("duration")}'></c:out>
+			<c:out value='${attraction.errors.get("duracion")}'></c:out>
+		</div>
+	</div>
+	<div class="mb-3">
+	<label for="cupoActual"
+			class='col-form-label ${attraction.errors.get("cupoActual") != null ? "is-invalid" : "" }'>CupoActual:</label>
+		<input class="form-control" type="number" id="capacity" name="capacity"
+			required value="${attraction.cupoActual}"></input>
+		<div class="invalid-feedback">
+			<c:out value='${attraction.errors.get("cupoActual")}'></c:out>
+		</div>
+		<label for="cupoMaximo"
+			class='col-form-label ${attraction.errors.get("cupoMaximo") != null ? "is-invalid" : "" }'>CupoMaximo:</label>
+		<input class="form-control" type="number" id="capacity" name="capacity"
+			required value="${attraction.cupoMaximo}"></input>
+		<div class="invalid-feedback">
+			<c:out value='${attraction.errors.get("cupoMaximo")}'></c:out>
 		</div>
 	</div>
 	<div class="mb-3">
 		<label for="capacity"
-			class='col-form-label ${attraction.errors.get("capacity") != null ? "is-invalid" : "" }'>Capacity:</label>
+			class='col-form-label ${attraction.errors.get("posicionX") != null ? "is-invalid" : "" }'>PosicionX:</label>
 		<input class="form-control" type="number" id="capacity" name="capacity"
-			required value="${attraction.capacity}"></input>
+			required value="${attraction.posicionX}"></input>
 		<div class="invalid-feedback">
-			<c:out value='${attraction.errors.get("capacity")}'></c:out>
+			<c:out value='${attraction.errors.get("posicionX")}'></c:out>
+		</div>
+	</div>
+	<div class="mb-3">
+		<label for="capacity"
+			class='col-form-label ${attraction.errors.get("PosicionY") != null ? "is-invalid" : "" }'>PosicionY:</label>
+		<input class="form-control" type="number" id="capacity" name="capacity"
+			required value="${attraction.posicionY}"></input>
+		<div class="invalid-feedback">
+			<c:out value='${attraction.errors.get("posicionY")}'></c:out>
 		</div>
 	</div>
 </div>

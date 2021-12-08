@@ -33,7 +33,7 @@
 
 		<c:if test="${user.isAdministrador()}">
 			<div class="mb-3">
-				<a href="/turismo/attractions/create.do" class="btn btn-primary"
+				<a href="/TP003/attractions/create.do" class="btn btn-primary"
 					role="button"> <i class="bi bi-plus-lg"></i> Nueva Atracción
 				</a>
 			</div>
@@ -43,8 +43,9 @@
 				<tr>
 					<th>Atracci&oacute;n</th>
 					<th>Costo</th>
-					<th>Duraci&oacute;n</th>
-					<th>Cupo</th>
+					<th>Duracion</th>
+					<th>CupoMaximo</th>
+					
 					<th>Acciones</th>
 				</tr>
 			</thead>
@@ -60,17 +61,17 @@
 						<td><c:out value="${attraction.cupoMaximo}"></c:out></td>
 
 						<td><c:if test="${user.administrador}">
-								<a href="/turismo/attractions/edit.do?id=${attraction.id}"
+								<a href="/TP003/attractions/edit.do?id=${attraction.id}"
 									class="btn btn-light rounded-0" role="button"><i
 									class="bi bi-pencil-fill"></i></a>
-								<a href="/turismo/attractions/delete.do?id=${attraction.id}"
+								<a href="/TP003/attractions/delete.do?id=${attraction.id}"
 									class="btn btn-danger rounded" role="button"><i
 									class="bi bi-x-circle-fill"></i></a>
 							</c:if> <c:choose>
 
 								<c:when
 									test="${user.canAfford(attraction) && user.canAttend(attraction) && attraction.canHost(1)}">
-									<a href="/turismo/attractions/buy.do?id=${attraction.id}"
+									<a href="/TP003/attractions/buy.do?id=${attraction.id}"
 										class="btn btn-success rounded" role="button">Comprar</a>
 								</c:when>
 								<c:otherwise>

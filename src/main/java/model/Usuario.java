@@ -105,6 +105,14 @@ public class Usuario {
 	public int getPosicionY() {
 		return posicionY;
 	}
+	
+	public boolean canAfford(Atraccion attraction) {
+		return attraction.getCosto() <= this.dineroDisponible;
+	}
+
+	public boolean canAttend(Atraccion attraction) {
+		return attraction.getDuracion() <= this.tiempoDisponible;
+	}
 
 	public void setPosicionY(int posicionY) {
 		this.posicionY = posicionY;

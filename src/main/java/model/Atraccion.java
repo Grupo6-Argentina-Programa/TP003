@@ -113,6 +113,14 @@ public class Atraccion implements Comparable<Atraccion> {
 			cupoActual--;
 		}
 	}
+	
+	public boolean canHost(int i) {
+		return cupoMaximo >= i;
+	}
+
+	public void host(int i) {
+		this.cupoMaximo -= i;
+	}
 
 ////////////////////////////////////////////////////////////////////////////////
 

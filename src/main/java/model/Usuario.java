@@ -132,6 +132,31 @@ public class Usuario implements InterfaceModel {
 		return atracciones;
 	}
 
+// Calculos de distancia. //////////////////////////////////////////////////////
+
+	public void setPosicionX(int posicionX) {
+		this.posicionX = posicionX;
+	}
+
+	public void setPosicionY(int posicionY) {
+		this.posicionY = posicionY;
+	}
+
+	@Override
+	public int getPosicionX() {
+		return posicionX;
+	}
+
+	@Override
+	public int getPosicionY() {
+		return posicionY;
+	}
+
+	@Override
+	public double distance(InterfaceModel otro) {
+		return sqrt(pow(this.posicionX - otro.getPosicionX(), 2) + pow(this.posicionY - otro.getPosicionY(), 2));
+	}
+
 // funciones convenientes //////////////////////////////////////////////////////
 
 	public void agregarAtraccion(Atraccion atraccion) {
@@ -195,30 +220,5 @@ public class Usuario implements InterfaceModel {
 
 	public boolean isNull() {
 		return false;
-	}
-
-// Distancia. //////////////////////////////////////////////////////////////////
-
-	public void setPosicionX(int posicionX) {
-		this.posicionX = posicionX;
-	}
-
-	public void setPosicionY(int posicionY) {
-		this.posicionY = posicionY;
-	}
-
-	@Override
-	public int getPosicionX() {
-		return posicionX;
-	}
-
-	@Override
-	public int getPosicionY() {
-		return posicionY;
-	}
-
-	@Override
-	public double distance(InterfaceModel otro) {
-		return sqrt(pow(this.posicionX - otro.getPosicionX(), 2) + pow(this.posicionY - otro.getPosicionY(), 2));
 	}
 }

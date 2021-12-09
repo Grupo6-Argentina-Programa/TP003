@@ -1,12 +1,16 @@
 package model;
 
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 import model.Enum.*;
+import model.utils.InterfaceModel;
 
-public class Atraccion implements Comparable<Atraccion> {
+public class Atraccion implements Comparable<Atraccion>, InterfaceModel {
 
 	private int id;
 	private String nombre;
@@ -46,15 +50,13 @@ public class Atraccion implements Comparable<Atraccion> {
 		this.posicionY = posicionY;
 	}
 
-////////////////////////////////////////////////////////////////////////////////
-
-	
+// Getters and Setters. ////////////////////////////////////////////////////////
 
 	public int getId() {
 		return id;
 	}
 
-	public void setID(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -62,8 +64,24 @@ public class Atraccion implements Comparable<Atraccion> {
 		return nombre;
 	}
 
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
 	public double getCosto() {
 		return costo;
+	}
+
+	public void setCosto(double costo) {
+		this.costo = costo;
+	}
+
+	public double getDuracion() {
+		return duracion;
+	}
+
+	public void setDuracion(double duracion) {
+		this.duracion = duracion;
 	}
 
 	public int getCupoActual() {
@@ -74,31 +92,52 @@ public class Atraccion implements Comparable<Atraccion> {
 		this.cupoActual = cupoActual;
 	}
 
-	public ENUMTIPO getTipo() {
-		return preferencia;
-	}
-
-	public void setPreferencia(ENUMTIPO tipoFavorito) {
-		this.preferencia = tipoFavorito;
-	}
-
-	public int getPosicionX() {
-		return posicionX;
-	}
-
-	public int getPosicionY() {
-		return posicionY;
-	}
-
-	public double getDuracion() {
-		return duracion;
-	}
-
 	public int getCupoMaximo() {
 		return cupoMaximo;
 	}
 
-////////////////////////////////////////////////////////////////////////////////
+	public void setCupoMaximo(int cupoMaximo) {
+		this.cupoMaximo = cupoMaximo;
+	}
+
+	public ENUMTIPO getPreferencia() {
+		return preferencia;
+	}
+
+	public void setPreferencia(ENUMTIPO preferencia) {
+		this.preferencia = preferencia;
+	}
+
+	public void setErrors(Map<String, String> errors) {
+		this.errors = errors;
+	}
+
+// Calculos de Distancia. //////////////////////////////////////////////////////
+
+	public void setPosicionX(int posicionX) {
+		this.posicionX = posicionX;
+	}
+
+	public void setPosicionY(int posicionY) {
+		this.posicionY = posicionY;
+	}
+
+	@Override
+	public int getPosicionX() {
+		return posicionX;
+	}
+
+	@Override
+	public int getPosicionY() {
+		return posicionY;
+	}
+
+	@Override
+	public double distance(InterfaceModel otro) {
+		return sqrt(pow(this.posicionX - otro.getPosicionX(), 2) + pow(this.posicionY - otro.getPosicionY(), 2));
+	}
+
+// Funciones y utiles. /////////////////////////////////////////////////////////
 
 	public boolean hayEspacio() {
 		return cupoActual < cupoMaximo;
@@ -113,7 +152,7 @@ public class Atraccion implements Comparable<Atraccion> {
 			cupoActual--;
 		}
 	}
-	
+
 	public boolean canHost(int i) {
 		return cupoMaximo >= i;
 	}
@@ -122,7 +161,30 @@ public class Atraccion implements Comparable<Atraccion> {
 		this.cupoMaximo -= i;
 	}
 
-////////////////////////////////////////////////////////////////////////////////
+	public Map<String, String> getErrors() {
+		return errors;
+	}
+
+	public boolean isValid() {
+		validate();
+		return errors.isEmpty();
+	}
+
+	public void validate() {
+		errors = new HashMap<String, String>();
+
+		if (costo <= 0) {
+			errors.put("cost", "Debe ser positivo");
+		}
+		if (duracion <= 0) {
+			errors.put("duration", "Debe ser positivo");
+		}
+		if (cupoMaximo <= 0) {
+			errors.put("capacity", "Debe ser positivo");
+		}
+	}
+
+// Overrides and comparate /////////////////////////////////////////////////////
 
 	@Override
 	public boolean equals(Object o) {
@@ -156,58 +218,4 @@ public class Atraccion implements Comparable<Atraccion> {
 				+ ", posicionY=" + posicionY + ", preferencia=" + preferencia + "]";
 	}
 
-	public boolean isValid() {
-		validate();
-		return errors.isEmpty();
-	}
-	
-	public void validate() {
-		errors = new HashMap<String, String>();
-
-		if (costo <= 0) {
-			errors.put("cost", "Debe ser positivo");
-		}
-		if (duracion <= 0) {
-			errors.put("duration", "Debe ser positivo");
-		}
-		if (cupoMaximo <= 0) {
-			errors.put("capacity", "Debe ser positivo");
-		}
-	}
-	
-	public Map<String, String> getErrors() {
-		return errors;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-		
-	}
-
-	public void setCosto(Double costo) {
-		this.costo = costo;
-		
-	}
-
-	public void setDuracion(Double duracion) {
-		this.duracion = duracion;
-		
-	}
-
-	public void setCupoMaximo(Integer cupoMaximo) {
-		this.cupoMaximo = cupoMaximo;
-	}
-
-	public void setPosicionX(Integer posicionX) {
-		this.posicionX = posicionX;
-		
-	}
-
-	public void setPosicionY(Integer posicionY) {
-		this.posicionY = posicionY;
-		
-	}
-
-	
-	
 }

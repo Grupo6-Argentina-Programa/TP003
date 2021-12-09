@@ -142,10 +142,10 @@ public class Promocion implements Comparable<Promocion> {
 		boolean first = true;
 		for (Atraccion atraccion : this.atracciones) {
 			if (first) {
-				this.preferencia = atraccion.getTipo();
+				this.preferencia = atraccion.getPreferencia();
 				first = false;
 			}
-			if (this.preferencia != atraccion.getTipo()) {
+			if (this.preferencia != atraccion.getPreferencia()) {
 				throw new Error("Los Tipos De las Atracciones no coinciden");
 			}
 		}

@@ -101,7 +101,7 @@ public class AtraccionDAOTest {
 		assertEquals(cantidadDeAtraccionInicial + 1, cantidadDeAtraccionesActual);
 
 		int idDB = attrctionDAO.findAttractionID("AtraccionTest");
-		atraccionLocal.setID(idDB);
+		atraccionLocal.setId(idDB);
 
 		Atraccion atraccionDB = attrctionDAO.findByName("AtraccionTest");
 
@@ -128,7 +128,7 @@ public class AtraccionDAOTest {
 		assertEquals(cantidadDeAtraccionInicial + 1, cantidadDeAtraccionesActual);
 
 		int idDB = attrctionDAO.findAttractionID("AtraccionTemporal");
-		atraccionTemporal.setID(idDB);
+		atraccionTemporal.setId(idDB);
 
 		attrctionDAO.delete(atraccionTemporal);
 		cantidadDeAtraccionesActual--;

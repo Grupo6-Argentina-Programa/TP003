@@ -1,11 +1,13 @@
 package model;
 
+import model.utils.InterfacePromocion;
+
 public class AtraccionSugerida {
     private final Atraccion[] atracciones;
-    private final PromocionInterface promocion;
+    private final InterfacePromocion promocion;
     private final int total;
 
-    public AtraccionSugerida(Atraccion[] atracciones, PromocionInterface promocion, int total) {
+    public AtraccionSugerida(Atraccion[] atracciones, InterfacePromocion promocion, int total) {
         this.atracciones = atracciones;
         this.promocion = promocion;
         this.total = total;
@@ -15,7 +17,7 @@ public class AtraccionSugerida {
         return atracciones;
     }
 
-    public PromocionInterface getPromocion() {
+    public InterfacePromocion getPromocion() {
         return promocion;
     }
 

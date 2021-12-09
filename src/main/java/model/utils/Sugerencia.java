@@ -1,4 +1,4 @@
-package model.Cmp;
+package model.utils;
 
 import model.Usuario;
 import model.Atraccion;

@@ -1,10 +1,10 @@
-package model.Cmp;
+package model.utils;
 
 import java.util.Comparator;
 
 import model.Promocion;
 
-public class PromocionComparador implements Comparator<Promocion> {
+public class ComparadorPromocion implements Comparator<Promocion> {
 
     @Override
     public int compare(Promocion promocionA, Promocion promocionB) {

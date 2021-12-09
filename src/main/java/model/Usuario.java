@@ -1,11 +1,13 @@
 package model;
 
 import java.util.*;
-
 import model.Enum.*;
-import utils.Crypt;
+import model.utils.InterfaceModel;
 
-public class Usuario {
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
+public class Usuario implements InterfaceModel {
 
 	private int id;
 	private String usuario;
@@ -94,28 +96,12 @@ public class Usuario {
 		this.tiempoDisponible = tiempoDisponible;
 	}
 
-	public int getPosicionX() {
-		return posicionX;
-	}
-
-	public void setPosicionX(int posicionX) {
-		this.posicionX = posicionX;
-	}
-
-	public int getPosicionY() {
-		return posicionY;
-	}
-	
 	public boolean canAfford(Atraccion attraction) {
 		return attraction.getCosto() <= this.dineroDisponible;
 	}
 
 	public boolean canAttend(Atraccion attraction) {
 		return attraction.getDuracion() <= this.tiempoDisponible;
-	}
-
-	public void setPosicionY(int posicionY) {
-		this.posicionY = posicionY;
 	}
 
 	public int getCostoTotal() {
@@ -175,47 +161,15 @@ public class Usuario {
 		Scanner scan = new Scanner(System.in);
 		return scan.nextLine();
 	}
-	
-	
+
 	public void addToItinerary(Atraccion attraction) {
 		this.dineroDisponible -= attraction.getCosto();
 		this.tiempoDisponible -= attraction.getDuracion();
 		// TODO agregar a su lista
 	}
 
-// Depurar /////////////////////////////////////////////////////////////////////
-
-	/*
-	 * public void recibirSugerencia(AtraccionSugerida sugerencia) {
-	 * System.out.println("\n\nSe ha hecho la siguiente sugerencia:\n"); if
-	 * (sugerencia.getPromocion() == null) { System.out.println("La atraccion:\n" +
-	 * sugerencia.getAtracciones()[0] + "\nTotal a pagar: " + sugerencia.getTotal()
-	 * + " monedas"); } else { StringBuilder concatenado = new StringBuilder(); for
-	 * (Atraccion atraccion : sugerencia.getAtracciones()) {
-	 * concatenado.append(atraccion).append("\n"); } System.out.println(
-	 * "La promocion es de tipo: " +
-	 * sugerencia.getPromocion().getClass().toString().split("\\.")[1] +
-	 * "\nLas atracciones:\n" + concatenado + "\nTotal a pagar: " +
-	 * sugerencia.getTotal() + " monedas." + "\nSe ahorra " +
-	 * calcularDifereciaMonedas(sugerencia) + " monedas."); } String aceptar; do {
-	 * System.out.println(
-	 * "\n¿Desea aceptar la sugerencia?\nIngrese \"Si\" para aceptar, de lo contrario ingrese \"No\" para rechazarlo."
-	 * ); aceptar = ingresarDatoStr(); // aceptar = in.nextLine(); } while
-	 * (!aceptar.equalsIgnoreCase("Si") && !aceptar.equalsIgnoreCase("No")); if
-	 * (aceptar.equalsIgnoreCase("Si")) { dineroDisponible -= sugerencia.getTotal();
-	 * for (Atraccion atraccion : sugerencia.getAtracciones()) { tiempoDisponible -=
-	 * atraccion.getDuracion(); atraccion.ocuparUnLugar(); } costoTotal +=
-	 * sugerencia.getTotal(); Collections.addAll(atracciones,
-	 * sugerencia.getAtracciones()); } }
-	 * 
-	 * private int calcularDifereciaMonedas(AtraccionSugerida sugerencia) { int
-	 * valorOriginal = 0; for (int i = 0; i < sugerencia.getAtracciones().length;
-	 * i++) { valorOriginal += sugerencia.getAtracciones()[i].getCosto(); } return
-	 * valorOriginal - sugerencia.getTotal(); }
-	 */
-
 // Overrides and comparate /////////////////////////////////////////////////////	
-	
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -240,7 +194,31 @@ public class Usuario {
 	}
 
 	public boolean isNull() {
-		// TODO Auto-generated method stub
 		return false;
+	}
+
+// Distancia. //////////////////////////////////////////////////////////////////
+
+	public void setPosicionX(int posicionX) {
+		this.posicionX = posicionX;
+	}
+
+	public void setPosicionY(int posicionY) {
+		this.posicionY = posicionY;
+	}
+
+	@Override
+	public int getPosicionX() {
+		return posicionX;
+	}
+
+	@Override
+	public int getPosicionY() {
+		return posicionY;
+	}
+
+	@Override
+	public double distance(InterfaceModel otro) {
+		return sqrt(pow(this.posicionX - otro.getPosicionX(), 2) + pow(this.posicionY - otro.getPosicionY(), 2));
 	}
 }

@@ -5,8 +5,10 @@
 <html>
 <head>
 <jsp:include page="/partials/head.jsp"></jsp:include>
+
+
 </head>
-<body>
+<body class="container">
 	<jsp:include page="/partials/nav.jsp"></jsp:include>
 
 	<main class="container">

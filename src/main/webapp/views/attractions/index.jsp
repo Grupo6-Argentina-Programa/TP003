@@ -5,6 +5,8 @@
 <html>
 <head>
 <jsp:include page="/partials/head.jsp"></jsp:include>
+
+
 </head>
 <body>
 

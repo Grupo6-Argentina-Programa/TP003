@@ -5,10 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>Promociones</title>
 <jsp:include page="/partials/head.jsp"></jsp:include>
 </head>
-<body>
+<body class="container">
 	<jsp:include page="/partials/nav.jsp"></jsp:include>
 	<div class="bg-light p-4 mb-3 rounded">
 		<h1>Estas son las promociones de la Tierra Media</h1>
@@ -19,10 +20,13 @@
 	<table class="table table-stripped table-hover">
 		<thead>
 			<tr>
+			    <th>Nombre</th>
 				<th>Tipo</th>
 				<th>Costo</th>
 				<th>Duracion</th>
 				<th>descuentoPorcentual</th>
+				<th>AtraccionA</th>
+				<th>AtraccionB</th>
                 <th>Distancia</th>
 			</tr>
 		</thead>
@@ -39,8 +43,10 @@
 							malesuada, iaculis diam. Ut ut imperdiet sapien.</p></td>
 					<td><c:out value="${promocion.tipoDePromocion}"></c:out></td>
 					<td><c:out value="${promocion.costo}"></c:out></td>
-                    
-					<td><c:out value="${promocion.descuentoPorcentual}"></c:out></td>
+					<td><c:out value="${promocion.getDuracion()}"></c:out></td>
+                    <td><c:out value="${promocion.descuentoPorcentual}"></c:out></td>
+                    <td><c:out value="${promocion.atracciones[0]}"></c:out></td>
+                    <td><c:out value="${promocion.atracciones[1]}"></c:out></td>
                     <td><c:out value="${user.distance(promocion)}"></c:out></td>
 
 				</tr>

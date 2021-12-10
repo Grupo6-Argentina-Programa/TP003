@@ -3,10 +3,14 @@ package model;
 import java.util.List;
 import java.util.Objects;
 
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
 import java.util.ArrayList;
 import model.Enum.*;
+import model.utils.InterfaceModel;
 
-public class Promocion implements Comparable<Promocion> {
+public class Promocion implements Comparable<Promocion>, InterfaceModel {
 
 	private final int Id;
 	private final String nombre;
@@ -189,6 +193,36 @@ public class Promocion implements Comparable<Promocion> {
 			return Double.compare(this.duracionTotal, o.getDuracion());
 		}
 		return Double.compare(this.costoTotal, o.getCosto());
+	}
+
+	@Override
+	public int getPosicionX() {
+		int x = 0;
+		for (Atraccion a : this.atracciones) {
+			x += a.getPosicionX();
+		}
+		return x;
+	}
+
+	@Override
+	public int getPosicionY() {
+		int y = 0;
+		for (Atraccion a : this.atracciones) {
+			y += a.getPosicionX();
+		}
+		return y;
+	}
+
+	@Override
+	public double distance(InterfaceModel otro) {
+		double distancia = Double.MAX_VALUE;
+		for (Atraccion a : this.atracciones) {
+			double aux = sqrt(
+					pow(a.getPosicionX() - otro.getPosicionX(), 2) + pow(a.getPosicionX() - otro.getPosicionY(), 2));
+			if (aux < distancia)
+				distancia = aux;
+		}
+		return distancia;
 	}
 
 }

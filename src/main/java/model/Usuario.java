@@ -103,6 +103,14 @@ public class Usuario implements InterfaceModel {
 	public boolean canAttend(Atraccion attraction) {
 		return attraction.getDuracion() <= this.tiempoDisponible;
 	}
+	
+	public boolean puedeComprarPromocion(Promocion promocion) {
+		return promocion.getCosto() <= this.dineroDisponible;
+	}
+
+	public boolean tieneTiempo(Promocion promocion) {
+		return promocion.getDuracion() <= this.tiempoDisponible;
+	}
 
 	public int getCostoTotal() {
 		return costoTotal;

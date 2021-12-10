@@ -34,6 +34,7 @@ public class CrearAtraccionServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		String nombre = req.getParameter("nombre");
 		Double costo = Double.parseDouble(req.getParameter("costo"));
 		Double duracion = Double.parseDouble(req.getParameter("duracion"));

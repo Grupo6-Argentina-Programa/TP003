@@ -73,7 +73,7 @@ public class Promocion implements Comparable<Promocion>, InterfaceModel {
 	public void setCosto(double costo) {
 		this.costoTotal = costo;
 	}
-
+	
 	public double getDuracion() {
 		return duracionTotal;
 	}

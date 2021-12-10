@@ -31,7 +31,7 @@ public class AtraccionService {
 
 		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
 		Atraccion atraccion = atraccionDAO.findByID(id);
-
+		
 		atraccion.setNombre(nombre);
 		atraccion.setCosto(costo);
 		atraccion.setDuracion(duracion);

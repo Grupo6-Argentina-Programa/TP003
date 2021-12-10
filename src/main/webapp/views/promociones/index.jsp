@@ -9,49 +9,71 @@
 <title>Promociones</title>
 <jsp:include page="/partials/head.jsp"></jsp:include>
 </head>
+
+
 <body class="container">
-	<jsp:include page="/partials/nav.jsp"></jsp:include>
-	<div class="bg-light p-4 mb-3 rounded">
-		<h1>Estas son las promociones de la Tierra Media</h1>
-	</div>
+	<main class="container">
+		<jsp:include page="/partials/nav.jsp"></jsp:include>
+		<div class="bg-light p-4 mb-3 rounded">
+			<h1>Estas son las promociones de la Tierra Media</h1>
+		</div>
 
 
 
-	<table class="table table-stripped table-hover">
-		<thead>
-			<tr>
-			    <th>Nombre</th>
-				<th>Tipo</th>
-				<th>Costo</th>
-				<th>Duracion</th>
-				<th>descuentoPorcentual</th>
-				<th>AtraccionA</th>
-				<th>AtraccionB</th>
-                <th>Distancia</th>
-			</tr>
-		</thead>
-
-
-
-
-		<tbody>
-			<c:forEach items="${promociones}" var="promocion">
+		<table class="table table-stripped table-hover">
+			<thead>
 				<tr>
-					<td><strong><c:out value="${promocion.nombre}"></c:out></strong>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Cras pretium eros urna. Sed quis erat congue, bibendum tortor
-							malesuada, iaculis diam. Ut ut imperdiet sapien.</p></td>
-					<td><c:out value="${promocion.tipoDePromocion}"></c:out></td>
-					<td><c:out value="${promocion.costo}"></c:out></td>
-					<td><c:out value="${promocion.getDuracion()}"></c:out></td>
-                    <td><c:out value="${promocion.descuentoPorcentual}"></c:out></td>
-                    <td><c:out value="${promocion.atracciones[0]}"></c:out></td>
-                    <td><c:out value="${promocion.atracciones[1]}"></c:out></td>
-                    <td><c:out value="${user.distance(promocion)}"></c:out></td>
-
+					<th>Nombre</th>
+					<th>Tipo</th>
+					<th>Costo</th>
+					<th>Duracion</th>
+					<th>descuentoPorcentual</th>
+					<th>AtraccionA</th>
+					<th>AtraccionB</th>
+					<th>Distancia</th>
+					<th>Acciones</th>
 				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+			</thead>
+
+
+
+
+			<tbody>
+				<c:forEach items="${promociones}" var="promocion">
+					<tr>
+						<td><strong><c:out value="${promocion.nombre}"></c:out></strong>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								Cras pretium eros urna. Sed quis erat congue, bibendum tortor
+								malesuada, iaculis diam. Ut ut imperdiet sapien.</p></td>
+						<td><c:out value="${promocion.tipoDePromocion}"></c:out></td>
+						<td><c:out value="${promocion.costo}"></c:out></td>
+						<td><c:out value="${promocion.getDuracion()}"></c:out></td>
+						<td><c:out value="${promocion.descuentoPorcentual}"></c:out></td>
+						<td><c:out value="${promocion.atracciones[0]}"></c:out></td>
+						<td><c:out value="${promocion.atracciones[1]}"></c:out></td>
+						<td><c:out value="${user.distance(promocion)}"></c:out></td>
+
+
+
+
+						<td><c:choose>
+							<c:when
+								test="${user.puedeComprarPromocion(promocion) && user.tieneTiempo(promocion)}">
+								<a href="/TP003/promociones/buy.do?id=${attraction.id}"
+									class="btn btn-success rounded" role="button">Comprar</a>
+							</c:when>
+							<c:otherwise>
+								<a href="#" class="btn btn-secondary rounded disabled"
+									role="button">No se puede comprar</a>
+
+							</c:otherwise>
+						</c:choose>
+						</td>
+					</tr>
+
+				</c:forEach>
+			</tbody>
+		</table>
+	</main>
 </body>
 </html>

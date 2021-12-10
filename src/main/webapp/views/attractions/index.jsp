@@ -45,11 +45,13 @@
 					<th>Costo</th>
 					<th>Duracion</th>
 					<th>CupoMaximo</th>
+					<th>Distancia</th>
 					
 					<th>Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
+			
 				<c:forEach items="${attractions}" var="attraction">
 					<tr>
 						<td><strong><c:out value="${attraction.nombre}"></c:out></strong>
@@ -59,7 +61,7 @@
 						<td><c:out value="${attraction.costo}"></c:out></td>
 						<td><c:out value="${attraction.duracion}"></c:out></td>
 						<td><c:out value="${attraction.cupoMaximo}"></c:out></td>
-
+                        <td><c:out value="${user.distance(attraction)}"></c:out></td>
 						<td><c:if test="${user.administrador}">
 								<a href="/TP003/attractions/edit.do?id=${attraction.id}"
 									class="btn btn-light rounded-0" role="button"><i

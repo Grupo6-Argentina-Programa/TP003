@@ -23,7 +23,7 @@
 				<th>Costo</th>
 				<th>Duracion</th>
 				<th>descuentoPorcentual</th>
-
+                <th>Distancia</th>
 			</tr>
 		</thead>
 
@@ -39,9 +39,9 @@
 							malesuada, iaculis diam. Ut ut imperdiet sapien.</p></td>
 					<td><c:out value="${promocion.tipoDePromocion}"></c:out></td>
 					<td><c:out value="${promocion.costo}"></c:out></td>
-
+                    
 					<td><c:out value="${promocion.descuentoPorcentual}"></c:out></td>
-
+                    <td><c:out value="${user.distance(promocion)}"></c:out></td>
 
 				</tr>
 			</c:forEach>

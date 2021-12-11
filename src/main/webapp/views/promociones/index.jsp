@@ -18,7 +18,7 @@
 			<h1>Estas son las promociones de la Tierra Media</h1>
 		</div>
 
-<c:if test="${user.isAdministrador()}">
+		<c:if test="${user.isAdministrador()}">
 			<div class="mb-3">
 				<a href="/TP003/promociones/create.do" class="btn btn-primary"
 					role="button"> <i class="bi bi-plus-lg"></i> Nueva Promocion
@@ -58,23 +58,26 @@
 						<td><c:out value="${promocion.atracciones[0]}"></c:out></td>
 						<td><c:out value="${promocion.atracciones[1]}"></c:out></td>
 						<td><c:out value="${user.distance(promocion)}"></c:out></td>
-
-
-
-
+						<td><c:if test="${user.administrador}">
+								<a href="/TP003/promociones/edit.do?id=${promocion.id}"
+									class="btn btn-light rounded-0" role="button"><i
+									class="bi bi-pencil-fill"></i></a>
+								<a href="/TP003/attractions/delete.do?id=${promocion.id}"
+									class="btn btn-danger rounded" role="button"><i
+									class="bi bi-x-circle-fill"></i></a>
+							</c:if>
 						<td><c:choose>
-							<c:when
-								test="${user.puedeComprarPromocion(promocion) && user.tieneTiempo(promocion)}">
-								<a href="/TP003/promociones/buy.do?id=${attraction.id}"
-									class="btn btn-success rounded" role="button">Comprar</a>
-							</c:when>
-							<c:otherwise>
-								<a href="#" class="btn btn-secondary rounded disabled"
-									role="button">No se puede comprar</a>
+								<c:when
+									test="${user.puedeComprarPromocion(promocion) && user.tieneTiempo(promocion)}">
+									<a href="/TP003/promociones/buy.do?id=${attraction.id}"
+										class="btn btn-success rounded" role="button">Comprar</a>
+								</c:when>
+								<c:otherwise>
+									<a href="#" class="btn btn-secondary rounded disabled"
+										role="button">No se puede comprar</a>
 
-							</c:otherwise>
-						</c:choose>
-						</td>
+								</c:otherwise>
+							</c:choose></td>
 					</tr>
 
 				</c:forEach>

@@ -7,19 +7,26 @@ public class Itinerario {
 	private final int IdUsuario;
 	private final int IdAtraccion;
 
+	String descripcion = "";
+
 	// Constructor Standard
 	public Itinerario(int IdUsuario, int IdAtraccion) {
-		super();
+		this.IdUsuario = IdUsuario;
+		this.IdAtraccion = IdAtraccion;
+	}
+
+	// Constructor Standard
+	public Itinerario(int IdUsuario, int IdAtraccion, String descripcion) {
 		this.IdUsuario = IdUsuario;
 		this.IdAtraccion = IdAtraccion;
 	}
 
 	// Constructor Utilizado por DAO
-	public Itinerario(int Id, int IdUsuario, int IdAtraccion) {
-		super();
+	public Itinerario(int Id, int IdUsuario, int IdAtraccion, String descripcion) {
 		this.Id = Id;
 		this.IdUsuario = IdUsuario;
 		this.IdAtraccion = IdAtraccion;
+		this.descripcion = descripcion;
 	}
 
 	public int getIdUsuario() {
@@ -36,6 +43,14 @@ public class Itinerario {
 
 	public void setId(int Id) {
 		this.Id = Id;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	@Override

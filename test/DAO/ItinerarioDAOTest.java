@@ -201,4 +201,26 @@ public class ItinerarioDAOTest {
 		}
 		assertFalse(seEncuentraEnLaBaseDeDatos);
 	}
+
+	@Test
+	public void actualizarDescripcionItinerario1Test() {
+		ItinerarioDAO itinerarioDAO = DAOFactory.getItinerarioDAO();
+		Itinerario itinerario = itinerarioDAO.findByID(1);
+		String descripcionInicial = itinerario.getDescripcion();
+
+		itinerario.setDescripcion("testeo");
+		itinerarioDAO.update(itinerario);
+
+		itinerario = itinerarioDAO.findByID(1);
+		String descripcionActual = itinerario.getDescripcion();
+		assertNotEquals(descripcionInicial, descripcionActual);
+
+		itinerario.setDescripcion("promocion1");
+		itinerarioDAO.update(itinerario);
+
+		itinerario = itinerarioDAO.findByID(1);
+		descripcionActual = itinerario.getDescripcion();
+		assertEquals(descripcionInicial, descripcionActual);
+	}
+
 }

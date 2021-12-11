@@ -16,12 +16,13 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 	@Override
 	public int insert(Itinerario itinerario) {
 		try {
-			String sql = "INSERT INTO Itinerario (IdUsuario , IdAtraccion) VALUES (?,?)";
+			String sql = "INSERT INTO Itinerario (IdUsuario , IdAtraccion, descripcion) VALUES (?,?,?)";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 
 			statement.setInt(1, itinerario.getIdUsuario());
 			statement.setInt(2, itinerario.getIdAtraccion());
+			statement.setString(3, itinerario.getDescripcion());
 
 			int rows = statement.executeUpdate();
 
@@ -33,8 +34,22 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 
 	@Override
 	public int update(Itinerario t) {
-		// No es necesario, ya que los Id estan definidos como final
-		return 0;
+		// solo actuliza descripcion
+		try {
+			String sql = "UPDATE Itinerario SET descripcion = ? WHERE id = ?";
+			Connection conn = ConnectionProvider.getConnection();
+
+			PreparedStatement statement = conn.prepareStatement(sql);
+
+			statement.setString(1, t.getDescripcion());
+			statement.setInt(2, t.getId());
+
+			int rows = statement.executeUpdate();
+
+			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
 	}
 
 	@Override
@@ -132,7 +147,8 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 	}
 
 	private Itinerario toItinerarios(ResultSet resultados) throws SQLException {
-		return new Itinerario(resultados.getInt(1), resultados.getInt(2), resultados.getInt(3));
+		return new Itinerario(resultados.getInt(1), resultados.getInt(2), resultados.getInt(3),
+				resultados.getString(4));
 	}
 
 }

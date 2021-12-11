@@ -7,8 +7,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import model.Itinerario;
-
 public class ItinerarioTest {
 
 	@Test
@@ -17,7 +15,7 @@ public class ItinerarioTest {
 		Itinerario itinerario1 = new Itinerario(1, 2);
 		assertNotNull(itinerario1);
 
-		Itinerario itinerario2 = new Itinerario(1, 3, 4);
+		Itinerario itinerario2 = new Itinerario(1, 3, 4, "");
 		assertNotNull(itinerario2);
 	}
 
@@ -32,7 +30,7 @@ public class ItinerarioTest {
 		assertEquals(obtenido1, esperado1);
 		assertEquals(obtenido2, esperado2);
 
-		Itinerario itinerario2 = new Itinerario(1, 3, 4);
+		Itinerario itinerario2 = new Itinerario(1, 3, 4, "");
 		int obtenido3 = itinerario2.getId();
 		int obtenido4 = itinerario2.getIdUsuario();
 		int obtenido5 = itinerario2.getIdAtraccion();
@@ -48,11 +46,11 @@ public class ItinerarioTest {
 	public void verificacionDe2ItinerariosIgualesTest() {
 
 		Itinerario itinerario1 = new Itinerario(1, 2);
-		Itinerario itinerario2 = new Itinerario(1, 1, 2);
+		Itinerario itinerario2 = new Itinerario(1, 1, 2, "");
 		assertFalse(itinerario1.equals(itinerario2));
 
 		Itinerario itinerario3 = new Itinerario(1, 2);
-		Itinerario itinerario4 = new Itinerario(0, 1, 2);
+		Itinerario itinerario4 = new Itinerario(0, 1, 2, "");
 		assertTrue(itinerario3.equals(itinerario4));
 
 	}

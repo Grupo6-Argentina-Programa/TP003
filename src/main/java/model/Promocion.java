@@ -1,24 +1,28 @@
 package model;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import model.Enum.*;
 import model.utils.InterfaceModel;
 
 public class Promocion implements Comparable<Promocion>, InterfaceModel {
 
 	private final int Id;
-	private final String nombre;
-	private final int tipoDePromocion;
-	private final int descuentoPorcentual;
+	private String nombre;
+	private int tipoDePromocion;
+	private int descuentoPorcentual;
 
 	private double costoTotal;
 	private double duracionTotal;
+	private Map<String, String> errors;
 
 	List<Atraccion> atracciones = new ArrayList<>();
 	private ENUMTIPO preferencia = ENUMTIPO.SinDefinir;
@@ -223,6 +227,38 @@ public class Promocion implements Comparable<Promocion>, InterfaceModel {
 				distancia = aux;
 		}
 		return distancia;
+	}
+
+	
+	public boolean isValid() {
+		validate();
+		return errors.isEmpty();
+	}
+	public void validate() {
+		errors = new HashMap<String, String>();
+
+		if (costoTotal <= 0) {
+			errors.put("cost", "Debe ser positivo");
+		}
+		if (duracionTotal <= 0) {
+			errors.put("duration", "Debe ser positivo");
+		}
+		
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre=nombre;
+		
+	}
+
+	public void setDescuentoPorcentual(Integer descuentoPorcentual) {
+		this.descuentoPorcentual=descuentoPorcentual;
+		
+	}
+
+	public void setTipoDePromocion(int tipoDePromocion) {
+		this.tipoDePromocion=tipoDePromocion;
+		
 	}
 
 }

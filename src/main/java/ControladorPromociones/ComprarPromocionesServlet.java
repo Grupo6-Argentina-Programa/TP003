@@ -1,4 +1,4 @@
-package ControladorAtracciones;
+package ControladorPromociones;
 
 import java.io.IOException;
 import java.util.Map;
@@ -29,9 +29,9 @@ public class ComprarPromocionesServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		Integer promocionesId = Integer.parseInt(req.getParameter("id"));
+		Integer promocionId = Integer.parseInt(req.getParameter("id"));
 		Usuario user = (Usuario) req.getSession().getAttribute("user");
-		Map<String, String> errors = comprarPromocionesService.buy(user.getId(), promocionesId);
+		Map<String, String> errors = comprarPromocionesService.buy(user.getId(), promocionId);
 		
 		Usuario user2 = DAOFactory.getUsuarioDAO().findById(user.getId());
 		req.getSession().setAttribute("user", user2);

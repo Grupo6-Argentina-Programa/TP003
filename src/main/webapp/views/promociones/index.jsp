@@ -18,7 +18,13 @@
 			<h1>Estas son las promociones de la Tierra Media</h1>
 		</div>
 
-
+<c:if test="${user.isAdministrador()}">
+			<div class="mb-3">
+				<a href="/TP003/promociones/create.do" class="btn btn-primary"
+					role="button"> <i class="bi bi-plus-lg"></i> Nueva Promocion
+				</a>
+			</div>
+		</c:if>
 
 		<table class="table table-stripped table-hover">
 			<thead>

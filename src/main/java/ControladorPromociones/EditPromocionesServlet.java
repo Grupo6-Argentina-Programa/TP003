@@ -1,4 +1,4 @@
-package ControladorAtracciones;
+package ControladorPromociones;
 
 import java.io.IOException;
 
@@ -8,30 +8,30 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Atraccion;
 import model.Promocion;
-import services.AtraccionService;
 
-@WebServlet("/attractions/edit.do")
-public class EditAtraccionesServlet extends HttpServlet {
+import services.PromocionesService;
+
+@WebServlet("/promociones/edit.do")
+public class EditPromocionesServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 7598291131560345626L;
-	private AtraccionService attractionService;
+	private PromocionesService promocionesService;
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		this.attractionService = new AtraccionService();
+		this.promocionesService = new PromocionesService();
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Integer id = Integer.parseInt(req.getParameter("id"));
 
-		Atraccion attraction = attractionService.find(id);
-		req.setAttribute("attraction", attraction);
+		Promocion promocion = promocionesService.find(id);
+		req.setAttribute("promocion", promocion);
 
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/attractions/edit.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/promociones/edit.jsp");
 		dispatcher.forward(req, resp);
 	}
 
@@ -43,7 +43,7 @@ public class EditAtraccionesServlet extends HttpServlet {
 		Integer descuentoPorcentual = Integer.parseInt(req.getParameter("desceuntoPorcentual"));
 		//List<Atraccion> atracciones = List<Atraccion>.parseList(req.getParameter("atracciones"));
 	
-		Promocion promocion = promocionesService.create(nombre, tipoDePromocion, costo, descuentoPorcentual, );
+		Promocion promocion = promocionesService.update(descuentoPorcentual, nombre, tipoDePromocion, costo, descuentoPorcentual, null );
 		if (promocion.isValid()) {
 			resp.sendRedirect("/TP003/promociones/index.do");
 		} else {

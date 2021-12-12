@@ -42,6 +42,7 @@ public class CrearAtraccionServlet extends HttpServlet {
 		Integer cupoMaximo = Integer.parseInt(req.getParameter("cupoMaximo"));
 		Integer posicionX = Integer.parseInt(req.getParameter("posicionX"));
 		Integer posicionY = Integer.parseInt(req.getParameter("posicionY"));
+		
 		Atraccion attraction = attractionService.create(nombre, costo, duracion, cupoActual, cupoMaximo, posicionX, posicionY);
 		if (attraction.isValid()) {
 			resp.sendRedirect("/TP003/attractions/index.do");

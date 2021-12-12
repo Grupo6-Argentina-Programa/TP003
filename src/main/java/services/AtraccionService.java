@@ -3,7 +3,9 @@ package services;
 import java.util.List;
 
 import model.Atraccion;
+import model.TipoDeAtraccion;
 import persistence.AtraccionDAO;
+import persistence.TipoDeAtraccionDAO;
 import persistence.commons.DAOFactory;
 
 public class AtraccionService {
@@ -46,14 +48,27 @@ public class AtraccionService {
 	}
 
 	public void delete(Integer id) {
-		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
-		Atraccion atraccion = new Atraccion(id, null, 0, 0, 0, 0, 0, 0);
-		atraccionDAO.delete(atraccion);
+		deleteAtraccion(id);
+		deleteTipoDeAtraccion(id);
 	}
 
 	public Atraccion find(Integer id) {
 		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
 		return atraccionDAO.findByID(id);
+	}
+
+////////////////////////////////////////////////////////////////////////////////
+
+	private void deleteAtraccion(Integer id) {
+		AtraccionDAO DAO = DAOFactory.getAtraccionDAO();
+		Atraccion atraccion = new Atraccion(id, null, 0, 0, 0, 0, 0, 0);
+		DAO.delete(atraccion);
+	}
+
+	private void deleteTipoDeAtraccion(Integer id) {
+		TipoDeAtraccionDAO DAO = DAOFactory.getTipoDeAtraccionDAO();
+		TipoDeAtraccion tipodeatraccion = DAO.findByReferenceAndType(id, "Atraccion");
+		DAO.delete(tipodeatraccion);
 	}
 
 }

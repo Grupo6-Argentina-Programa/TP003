@@ -64,6 +64,28 @@
 		</div>
 	</div>
 
+	<div class="mb-3">
+		<label for="capacity"
+			class='col-form-label ' >Tipo de atraccion</label>
+	<!-- 	<input class="form-control" type="number" id="capacity"
+			name="tipoAtraccion" required value="${attraction.posicionY}"></input> -->
+			<select required class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+			     
+                        <option value="" selected>PAISAJE</option>
+                        <option value="">AVENTURA</option>
+                        <option value="">DEGUSTACION</option>
+                
+                
+             
+			</select>
+		<!-- <div class="invalid-feedback">
+			<c:out value='${attraction.errors.get("posicionY")}'></c:out>
+		</div> -->
+	</div>
+
+
+
+
 </div>
 <div>
 	<button type="submit" class="btn btn-primary">Guardar</button>

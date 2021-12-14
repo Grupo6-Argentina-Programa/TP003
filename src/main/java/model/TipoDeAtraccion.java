@@ -8,7 +8,8 @@ public class TipoDeAtraccion {
 	private int Id = 0;
 	private final int idReferencia;
 	private final String tipoDelObjeto;
-	private final String tipoFavorito;
+	
+	private String tipoFavorito = "SinDefinir";
 	private ENUMTIPO preferencia = ENUMTIPO.SinDefinir;
 
 	public TipoDeAtraccion(int Id, int IdReferencia, String TipoDelObjeto, String TipoFavorito) {
@@ -24,6 +25,11 @@ public class TipoDeAtraccion {
 		this.tipoDelObjeto = TipoDelObjeto;
 		this.tipoFavorito = TipoFavorito;
 		asignarPreferencia(TipoFavorito);
+	}
+	
+	public TipoDeAtraccion(int IdReferencia, String TipoDelObjeto) {
+		this.idReferencia = IdReferencia;
+		this.tipoDelObjeto = TipoDelObjeto;
 	}
 
 	public int getId() {

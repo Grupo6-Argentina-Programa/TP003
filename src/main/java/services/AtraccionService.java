@@ -22,9 +22,9 @@ public class AtraccionService {
 		if (atraccion.isValid()) {
 			AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
 			atraccionDAO.insert(atraccion);
+			crearTDA(atraccion.getNombre());
 			// XXX: si no devuelve "1", es que hubo más errores
 		}
-
 		return atraccion;
 	}
 
@@ -48,8 +48,8 @@ public class AtraccionService {
 	}
 
 	public void delete(Integer id) {
-		deleteAtraccion(id);
 		deleteTipoDeAtraccion(id);
+		deleteAtraccion(id);
 	}
 
 	public Atraccion find(Integer id) {
@@ -69,6 +69,16 @@ public class AtraccionService {
 		TipoDeAtraccionDAO DAO = DAOFactory.getTipoDeAtraccionDAO();
 		TipoDeAtraccion tipodeatraccion = DAO.findByReferenceAndType(id, "Atraccion");
 		DAO.delete(tipodeatraccion);
+	}
+	
+	private void crearTDA(String nombreDeLaAtraccion) {
+		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
+		Atraccion atraccion = atraccionDAO.findByName(nombreDeLaAtraccion);
+		
+		TipoDeAtraccionDAO tipodeatraccionDAO = DAOFactory.getTipoDeAtraccionDAO();
+		TipoDeAtraccion tipodeatraccion = new TipoDeAtraccion(atraccion.getId(), "Atraccion");
+		
+		tipodeatraccionDAO.insert(tipodeatraccion);
 	}
 
 }

@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Atraccion;
-import model.Promocion;
 import services.AtraccionService;
 
 @WebServlet("/attractions/edit.do")
@@ -25,13 +24,18 @@ public class EditAtraccionesServlet extends HttpServlet {
 	}
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		Integer id = Integer.parseInt(req.getParameter("id"));
+		
+		Atraccion attraction = attractionService.find(id);
+		req.setAttribute("attraction", attraction);
 
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/attractions/create.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/attractions/edit.jsp");
 		dispatcher.forward(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		Integer id = Integer.parseInt(req.getParameter("id"));
 		
 		String nombre = req.getParameter("nombre");
 		Double costo = Double.parseDouble(req.getParameter("costo"));
@@ -40,7 +44,7 @@ public class EditAtraccionesServlet extends HttpServlet {
 		Integer cupoMaximo = Integer.parseInt(req.getParameter("cupoMaximo"));
 		Integer posicionX = Integer.parseInt(req.getParameter("posicionX"));
 		Integer posicionY = Integer.parseInt(req.getParameter("posicionY"));
-		Atraccion attraction = attractionService.create(nombre, costo, duracion, cupoActual, cupoMaximo, posicionX, posicionY);
+		Atraccion attraction = attractionService.update(id, nombre, costo, duracion, cupoActual, cupoMaximo, posicionX, posicionY);
 		if (attraction.isValid()) {
 			resp.sendRedirect("/TP003/attractions/index.do");
 		} else {

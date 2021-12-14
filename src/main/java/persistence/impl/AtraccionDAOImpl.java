@@ -39,14 +39,19 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 
 	@Override
 	public int update(Atraccion atraccion) {
-		// solo actuliza el cupo actual
 		try {
-			String sql = "UPDATE Atraccion SET cupoActual = ? WHERE id = ?";
+			String sql = "UPDATE Atraccion SET nombre = ?, costo = ?, duracion = ?, cupoActual = ?, cupoMaximo = ?, posicionX = ?, posicionY = ? WHERE id = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 
-			statement.setInt(1, atraccion.getCupoActual());
-			statement.setInt(2, atraccion.getId());
+			statement.setString(1, atraccion.getNombre());
+			statement.setDouble(2, atraccion.getCosto());
+			statement.setDouble(3, atraccion.getDuracion());
+			statement.setInt(4, atraccion.getCupoActual());
+			statement.setInt(5, atraccion.getCupoMaximo());
+			statement.setInt(6, atraccion.getPosicionX());
+			statement.setInt(7, atraccion.getPosicionY());
+			statement.setInt(8, atraccion.getId());
 
 			int rows = statement.executeUpdate();
 

@@ -16,9 +16,7 @@ public class AtraccionService {
 
 	public Atraccion create(String nombre, Double costo, Double duracion, Integer cupoActual, Integer cupoMaximo,
 			Integer posicionX, Integer posicionY) {
-
 		Atraccion atraccion = new Atraccion(-1, nombre, costo, duracion, cupoActual, cupoMaximo, posicionX, posicionY);
-
 		if (atraccion.isValid()) {
 			AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
 			atraccionDAO.insert(atraccion);
@@ -30,16 +28,17 @@ public class AtraccionService {
 
 	public Atraccion update(Integer id, String nombre, Double costo, Double duracion, Integer cupoActual,
 			Integer cupoMaximo, Integer posicionX, Integer posicionY) {
-
 		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
+		
 		Atraccion atraccion = atraccionDAO.findByID(id);
-
+		
 		atraccion.setNombre(nombre);
 		atraccion.setCosto(costo);
 		atraccion.setDuracion(duracion);
 		atraccion.setCupoMaximo(cupoMaximo);
 		atraccion.setPosicionX(posicionX);
 		atraccion.setPosicionY(posicionY);
+		
 		if (atraccion.isValid()) {
 			atraccionDAO.update(atraccion);
 			// XXX: si no devuelve "1", es que hubo más errores

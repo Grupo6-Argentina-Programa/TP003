@@ -65,28 +65,14 @@
 	</div>
 
 	<div class="mb-3">
-		<label for="capacity"
-			class='col-form-label ' >Tipo de atraccion</label>
-	<!-- 	<input class="form-control" type="number" id="capacity"
-			name="tipoAtraccion" required value="${attraction.posicionY}"></input> -->
-			<select required class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-			     
-                        <option value="" selected>PAISAJE</option>
-                        <option value="">AVENTURA</option>
-                        <option value="">DEGUSTACION</option>
-                
-                
-             
-			</select>
-		<!-- <div class="invalid-feedback">
-			<c:out value='${attraction.errors.get("posicionY")}'></c:out>
-		</div> -->
+		<label for="preferencias" class="col-form-label">Preferencias:
+			(Solo valido (" PAISAJE ")|| (" AVENTURA ") || (" DEGUSTACION "))</label> <input
+			type="text" class="form-control" id="name" name="preferencias"
+			required value="${attraction.nombre}">
 	</div>
 
-
-
-
 </div>
+
 <div>
 	<button type="submit" class="btn btn-primary">Guardar</button>
 	<a onclick="window.history.back();" class="btn btn-secondary"

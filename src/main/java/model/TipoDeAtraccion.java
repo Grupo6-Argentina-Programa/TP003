@@ -8,7 +8,7 @@ public class TipoDeAtraccion {
 	private int Id = 0;
 	private final int idReferencia;
 	private final String tipoDelObjeto;
-	
+
 	private String tipoFavorito = "SinDefinir";
 	private ENUMTIPO preferencia = ENUMTIPO.SinDefinir;
 
@@ -19,14 +19,14 @@ public class TipoDeAtraccion {
 		this.tipoFavorito = TipoFavorito;
 		asignarPreferencia(TipoFavorito);
 	}
-	
+
 	public TipoDeAtraccion(int IdReferencia, String TipoDelObjeto, String TipoFavorito) {
 		this.idReferencia = IdReferencia;
 		this.tipoDelObjeto = TipoDelObjeto;
 		this.tipoFavorito = TipoFavorito;
 		asignarPreferencia(TipoFavorito);
 	}
-	
+
 	public TipoDeAtraccion(int IdReferencia, String TipoDelObjeto) {
 		this.idReferencia = IdReferencia;
 		this.tipoDelObjeto = TipoDelObjeto;
@@ -63,16 +63,20 @@ public class TipoDeAtraccion {
 
 	public void asignarPreferencia(String preferencia) {
 
-		if (preferencia.equals("Degustacion")) {
-			this.preferencia = ENUMTIPO.DEGUSTACION;
-		}
-
-		if (preferencia.equals("Paisaje")) {
+		if (preferencia.equals("PAISAJE") || preferencia.equals("Paisaje") || preferencia.equals("paisaje")) {
 			this.preferencia = ENUMTIPO.PAISAJE;
+			this.tipoFavorito = "Paisaje";
 		}
 
-		if (preferencia.equals("Aventura")) {
+		if (preferencia.equals("AVENTURA") || preferencia.equals("Aventura") || preferencia.equals("aventura")) {
 			this.preferencia = ENUMTIPO.AVENTURA;
+			this.tipoFavorito = "Aventura";
+		}
+
+		if (preferencia.equals("DEGUSTACION") || preferencia.equals("Degustacion")
+				|| preferencia.equals("degustacion")) {
+			this.preferencia = ENUMTIPO.DEGUSTACION;
+			this.tipoFavorito = "Degustacion";
 		}
 	}
 

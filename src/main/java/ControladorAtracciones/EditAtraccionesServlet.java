@@ -44,7 +44,13 @@ public class EditAtraccionesServlet extends HttpServlet {
 		Integer cupoMaximo = Integer.parseInt(req.getParameter("cupoMaximo"));
 		Integer posicionX = Integer.parseInt(req.getParameter("posicionX"));
 		Integer posicionY = Integer.parseInt(req.getParameter("posicionY"));
-		Atraccion attraction = attractionService.update(id, nombre, costo, duracion, cupoActual, cupoMaximo, posicionX, posicionY);
+		
+		//
+		String preferencias = req.getParameter("preferencias");
+		System.out.println(preferencias);
+		//
+		
+		Atraccion attraction = attractionService.update(id, nombre, costo, duracion, cupoActual, cupoMaximo, posicionX, posicionY, preferencias);
 		if (attraction.isValid()) {
 			resp.sendRedirect("/TP003/attractions/index.do");
 		} else {

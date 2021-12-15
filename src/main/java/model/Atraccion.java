@@ -107,6 +107,25 @@ public class Atraccion implements Comparable<Atraccion>, InterfaceModel {
 	public void setPreferencia(ENUMTIPO preferencia) {
 		this.preferencia = preferencia;
 	}
+	
+	public String getPreferenciaString() {
+		if(this.preferencia.equals(ENUMTIPO.PAISAJE))
+			return "Paisaje";
+		if(this.preferencia.equals(ENUMTIPO.AVENTURA))
+			return "Aventura";
+		if(this.preferencia.equals(ENUMTIPO.DEGUSTACION))
+			return "Degustacion";;
+		return "SinDefinir";
+	}
+	
+	public void setPreferenciaString(String preferencia) {
+		if(preferencia.equals("PAISAJE")||preferencia.equals("paisaje")||preferencia.equals("Paisaje"))
+			this.preferencia = ENUMTIPO.PAISAJE;
+		if(preferencia.equals("AVENTURA")||preferencia.equals("aventura")||preferencia.equals("Aventura"))
+			this.preferencia = ENUMTIPO.AVENTURA;
+		if(preferencia.equals("DEGUSTACION")||preferencia.equals("degustacion")||preferencia.equals("Degustacion"))
+			this.preferencia = ENUMTIPO.DEGUSTACION;
+	}
 
 	public void setErrors(Map<String, String> errors) {
 		this.errors = errors;

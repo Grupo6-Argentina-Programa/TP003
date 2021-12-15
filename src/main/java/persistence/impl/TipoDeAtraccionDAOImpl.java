@@ -16,7 +16,7 @@ public class TipoDeAtraccionDAOImpl implements TipoDeAtraccionDAO {
 	@Override
 	public int insert(TipoDeAtraccion t) {
 		try {
-			String sql = "INSERT INTO TipoAtraccion (idReferencia, tipoDelObjeto, tipoFavorito) VALUES (?,?,?)";
+			String sql = "INSERT INTO TipoDeAtraccion (idReferencia, tipoDelObjeto, preferencia) VALUES (?,?,?)";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 
@@ -34,14 +34,27 @@ public class TipoDeAtraccionDAOImpl implements TipoDeAtraccionDAO {
 
 	@Override
 	public int update(TipoDeAtraccion t) {
-		// No se utiliza
-		return 0;
+		try {
+			String sql = "UPDATE TipoDeAtraccion SET preferencia = ? WHERE id = ?";
+			Connection conn = ConnectionProvider.getConnection();
+
+			PreparedStatement statement = conn.prepareStatement(sql);
+
+			statement.setString(1, t.getTipoFavorito());
+			statement.setInt(2, t.getId());
+
+			int rows = statement.executeUpdate();
+
+			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
 	}
 
 	@Override
 	public int delete(TipoDeAtraccion t) {
 		try {
-			String sql = "DELETE FROM TipoAtraccion WHERE id = ?";
+			String sql = "DELETE FROM TipoDeAtraccion WHERE id = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 
@@ -58,7 +71,7 @@ public class TipoDeAtraccionDAOImpl implements TipoDeAtraccionDAO {
 	@Override
 	public int countAll() {
 		try {
-			String sql = "SELECT COUNT(1) AS TOTAL FROM TipoAtraccion";
+			String sql = "SELECT COUNT(1) AS TOTAL FROM TipoDeAtraccion";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet resultados = statement.executeQuery();
@@ -75,7 +88,7 @@ public class TipoDeAtraccionDAOImpl implements TipoDeAtraccionDAO {
 	@Override
 	public List<TipoDeAtraccion> findAll() {
 		try {
-			String sql = "SELECT * FROM TipoAtraccion";
+			String sql = "SELECT * FROM TipoDeAtraccion";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet resultados = statement.executeQuery();
@@ -94,7 +107,7 @@ public class TipoDeAtraccionDAOImpl implements TipoDeAtraccionDAO {
 	@Override
 	public TipoDeAtraccion findByID(int IdTipoAtraccion) {
 		try {
-			String sql = "SELECT * FROM TipoAtraccion WHERE id = ?";
+			String sql = "SELECT * FROM TipoDeAtraccion WHERE id = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setInt(1, IdTipoAtraccion);
@@ -115,7 +128,7 @@ public class TipoDeAtraccionDAOImpl implements TipoDeAtraccionDAO {
 	@Override
 	public TipoDeAtraccion findByReferenceAndType(int reference, String type) {
 		try {
-			String sql = "SELECT * FROM TipoAtraccion WHERE idReferencia = ? AND tipoDelObjeto = ?";
+			String sql = "SELECT * FROM TipoDeAtraccion WHERE idReferencia = ? AND tipoDelObjeto = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setInt(1, reference);
@@ -143,7 +156,7 @@ public class TipoDeAtraccionDAOImpl implements TipoDeAtraccionDAO {
 	@Override
 	public int countOnlyObjectsOfOneType(String objctType) {
 		try {
-			String sql = "SELECT COUNT(1) AS TOTAL FROM TipoAtraccion WHERE tipoDelObjeto = ?";
+			String sql = "SELECT COUNT(1) AS TOTAL FROM TipoDeAtraccion WHERE tipoDelObjeto = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, objctType);
@@ -161,7 +174,7 @@ public class TipoDeAtraccionDAOImpl implements TipoDeAtraccionDAO {
 	@Override
 	public List<TipoDeAtraccion> findOnlyObjectsOfOneType(String objctType) {
 		try {
-			String sql = "SELECT * FROM TipoAtraccion WHERE tipoDelObjeto = ?";
+			String sql = "SELECT * FROM TipoDeAtraccion WHERE tipoDelObjeto = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, objctType);

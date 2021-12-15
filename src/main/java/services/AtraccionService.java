@@ -15,19 +15,31 @@ public class AtraccionService {
 	}
 
 	public Atraccion create(String nombre, Double costo, Double duracion, Integer cupoActual, Integer cupoMaximo,
-			Integer posicionX, Integer posicionY) {
+			Integer posicionX, Integer posicionY, String tipoDeAtraccion) {
+		
+		System.out.println("Valor dentro del create -> "+ tipoDeAtraccion);
+		
 		Atraccion atraccion = new Atraccion(-1, nombre, costo, duracion, cupoActual, cupoMaximo, posicionX, posicionY);
+		atraccion.setPreferenciaString(tipoDeAtraccion);
+		
+		System.out.println("Valor despues del seteo -> "+ atraccion.getPreferencia());
+		System.out.println("Valor despues del seteo -> "+ atraccion.getPreferenciaString());
+		
 		if (atraccion.isValid()) {
-			AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
-			atraccionDAO.insert(atraccion);
-			crearTDA(atraccion.getNombre());
+			
+			System.out.println("Es valido ");
+			
+			insertarAtraccionEnDAO(atraccion);
+			System.out.println("Se inserto atraccion ");
+			crearTDAenDAO(atraccion);
+			System.out.println("Se creo DAO ");
 			// XXX: si no devuelve "1", es que hubo más errores
 		}
 		return atraccion;
 	}
 
 	public Atraccion update(Integer id, String nombre, Double costo, Double duracion, Integer cupoActual,
-			Integer cupoMaximo, Integer posicionX, Integer posicionY) {
+			Integer cupoMaximo, Integer posicionX, Integer posicionY, String tipoDeAtraccion) {
 		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
 		
 		Atraccion atraccion = atraccionDAO.findByID(id);
@@ -39,8 +51,17 @@ public class AtraccionService {
 		atraccion.setPosicionX(posicionX);
 		atraccion.setPosicionY(posicionY);
 		
+
+		atraccion.setPreferenciaString(tipoDeAtraccion);
+		System.out.println("Valor despues del seteo -> "+ atraccion.getPreferencia());
+		System.out.println("Valor despues del seteo -> "+ atraccion.getPreferenciaString());
+		
 		if (atraccion.isValid()) {
+			System.out.println("Se valido");
 			atraccionDAO.update(atraccion);
+			System.out.println("Se actualizo Atraccion en DAO ");
+			actualizarTDAenDAO(atraccion);
+			System.out.println("Se actualizo TDA en DAO ");
 			// XXX: si no devuelve "1", es que hubo más errores
 		}
 		return atraccion;
@@ -70,14 +91,28 @@ public class AtraccionService {
 		DAO.delete(tipodeatraccion);
 	}
 	
-	private void crearTDA(String nombreDeLaAtraccion) {
+	private void insertarAtraccionEnDAO(Atraccion atraccion) {
 		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
-		Atraccion atraccion = atraccionDAO.findByName(nombreDeLaAtraccion);
+		atraccionDAO.insert(atraccion);
+	}
+	
+	private void crearTDAenDAO(Atraccion atraccion) {
+		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
+		Atraccion atraccion1 = atraccionDAO.findByName(atraccion.getNombre());
 		
 		TipoDeAtraccionDAO tipodeatraccionDAO = DAOFactory.getTipoDeAtraccionDAO();
-		TipoDeAtraccion tipodeatraccion = new TipoDeAtraccion(atraccion.getId(), "Atraccion");
+		TipoDeAtraccion tipodeatraccion = new TipoDeAtraccion(atraccion1.getId(), "Atraccion", atraccion.getPreferenciaString());
 		
 		tipodeatraccionDAO.insert(tipodeatraccion);
+	}
+	
+	private void actualizarTDAenDAO(Atraccion atraccion) {
+		TipoDeAtraccionDAO tipodeatraccionDAO = DAOFactory.getTipoDeAtraccionDAO();
+		TipoDeAtraccion tipodeatraccion = tipodeatraccionDAO.findByReferenceAndType(atraccion.getId(), "Atraccion");
+		
+		tipodeatraccion.asignarPreferencia(atraccion.getPreferenciaString());
+		
+		tipodeatraccionDAO.update(tipodeatraccion);
 	}
 
 }

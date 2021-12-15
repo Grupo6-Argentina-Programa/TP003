@@ -36,13 +36,35 @@ public class CrearPromocionesServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		System.out.println("llego a servlet");
+		
 		String nombre = req.getParameter("nombre");
-		Integer tipoDePromocion = Integer.parseInt(req.getParameter("tipoDePromocion"));
-		Double costo = Double.parseDouble(req.getParameter("costo"));
-		Integer descuentoPorcentual = Integer.parseInt(req.getParameter("desceuntoPorcentual"));
-		//List<Atraccion> atracciones = List<Atraccion>.parseList(req.getParameter("atracciones"));
-	
-		Promocion promocion = promocionesService.create(nombre, tipoDePromocion, costo, descuentoPorcentual, null );
+		System.out.println("nombre ->" + nombre);
+		
+		Integer tipoDePromocion = Integer.parseInt(req.getParameter("tipodepromocion"));
+		System.out.println("tipoDePromocion ->" + tipoDePromocion);
+		
+		Double costoTotal = Double.parseDouble(req.getParameter("costototal"));
+		System.out.println("costoTotal ->" + costoTotal);
+		
+		Integer descuentoPorcentual = Integer.parseInt(req.getParameter("descuentoporcentual"));
+		System.out.println("descuentoPorcentual ->" + descuentoPorcentual);
+		
+		Integer atraccion1 = Integer.parseInt(req.getParameter("atraccion1"));
+		System.out.println("atraccion1 ->" + atraccion1);
+		
+		Integer atraccion2 = Integer.parseInt(req.getParameter("atraccion2"));
+		System.out.println("atraccion2 ->" + atraccion2);
+		
+		Integer atraccionP = Integer.parseInt(req.getParameter("atraccionP"));
+		System.out.println("atraccionP ->" + atraccionP);
+		
+		System.out.println("cargo todos los valores");
+		System.out.println("posterioremnte creacion");
+		
+		Promocion promocion = null;
+		
+		//Promocion promocion = promocionesService.create(nombre, tipoDePromocion, costo, descuentoPorcentual, null );
 		if (promocion.isValid()) {
 			resp.sendRedirect("/TP003/promociones/index.do");
 		} else {

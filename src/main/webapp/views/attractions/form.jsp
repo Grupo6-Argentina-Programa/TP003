@@ -77,4 +77,5 @@
 	<button type="submit" class="btn btn-primary">Guardar</button>
 	<a onclick="window.history.back();" class="btn btn-secondary"
 		role="button">Cancelar</a>
+		<span>Se debe colocar "0" en caso de que corresponda</span>
 </div>

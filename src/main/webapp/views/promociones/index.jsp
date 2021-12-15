@@ -62,7 +62,7 @@
 								<a href="/TP003/promociones/edit.do?id=${promocion.id}"
 									class="btn btn-light rounded-0" role="button"><i
 									class="bi bi-pencil-fill"></i></a>
-								<a href="/TP003/attractions/delete.do?id=${promocion.id}"
+								<a href="/TP003/promociones/delete.do?id=${promocion.id}"
 									class="btn btn-danger rounded" role="button"><i
 									class="bi bi-x-circle-fill"></i></a>
 							</c:if>

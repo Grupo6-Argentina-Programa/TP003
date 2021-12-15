@@ -43,19 +43,22 @@ public class PromocionesService {
 
 		PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
 		Promocion promocion = promocionDAO.findByID(id);
+		
+		List<Atraccion> atracciones = new ArrayList<>();
+		agreagrAtraccionDeDAO(atracciones, atraccion1);
+		agreagrAtraccionDeDAO(atracciones, atraccion2);
+		if(tipoDePromocion.equals(3))
+			agreagrAtraccionDeDAO(atracciones, atraccionP);
 
 		promocion.setNombre(nombre);
 		promocion.setTipoDePromocion(tipoDePromocion);
 		promocion.setCosto(costoTotal);
 		promocion.setDescuentoPorcentual(descuentoPorcentual);
-		
-		//buscar atracciones
-		
-		
-		promocion.setNombre(preferencias);
+		promocion.setAtracciones(atracciones);
 
 		if (promocion.isValid()) {
 			promocionDAO.update(promocion);
+			actualizarTDAenDAO(promocion.getId(), preferencias);
 			// XXX: si no devuelve "1", es que hubo más errores
 		}
 
@@ -94,6 +97,15 @@ public class PromocionesService {
 		TipoDeAtraccion tipodeatraccion1 = new TipoDeAtraccion(promocion1.getId(), "Promocion", preferencias);
 		
 		tipodeatraccionDAO.insert(tipodeatraccion1);
+	}
+	
+	private void actualizarTDAenDAO(Integer idDePromocion, String tipoDeAtraccion) {
+		TipoDeAtraccionDAO tipodeatraccionDAO = DAOFactory.getTipoDeAtraccionDAO();
+		TipoDeAtraccion tipodeatraccion1 = tipodeatraccionDAO.findByReferenceAndType(idDePromocion, "Promocion");
+		
+		tipodeatraccion1.asignarPreferencia(tipoDeAtraccion);
+		
+		tipodeatraccionDAO.update(tipodeatraccion1);
 	}
 	
 	private void deletePromocion(Integer id) {

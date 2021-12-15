@@ -34,35 +34,15 @@ public class CrearPromocionesServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("llego a servlet");
-		
 		String nombre = req.getParameter("nombre");
-		System.out.println("nombre ->" + nombre);
-		
 		Integer tipoDePromocion = Integer.parseInt(req.getParameter("tipodepromocion"));
-		System.out.println("tipoDePromocion ->" + tipoDePromocion);
-		
 		Double costoTotal = Double.parseDouble(req.getParameter("costototal"));
-		System.out.println("costoTotal ->" + costoTotal);
-		
 		Integer descuentoPorcentual = Integer.parseInt(req.getParameter("descuentoporcentual"));
-		System.out.println("descuentoPorcentual ->" + descuentoPorcentual);
-		
 		String preferencias = req.getParameter("preferencias");
-		System.out.println("preferencias ->" + preferencias);
-		
 		Integer atraccion1 = Integer.parseInt(req.getParameter("atraccion1"));
-		System.out.println("atraccion1 ->" + atraccion1);
-		
 		Integer atraccion2 = Integer.parseInt(req.getParameter("atraccion2"));
-		System.out.println("atraccion2 ->" + atraccion2);
-		
 		Integer atraccionP = Integer.parseInt(req.getParameter("atraccionP"));
-		System.out.println("atraccionP ->" + atraccionP);
-		
-		System.out.println("cargo todos los valores");
-		System.out.println("posterioremnte creacion");
-		
+
 		Promocion promocion = promocionesService.create(nombre, tipoDePromocion, costoTotal, descuentoPorcentual, atraccion1, atraccion2, atraccionP, preferencias);
 		
 		if (promocion.isValid()) {

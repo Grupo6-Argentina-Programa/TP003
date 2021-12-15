@@ -89,6 +89,10 @@ public class Promocion implements Comparable<Promocion>, InterfaceModel {
 	public List<Atraccion> getAtracciones() {
 		return atracciones;
 	}
+	
+	public void setAtracciones(List<Atraccion> atracciones) {
+		this.atracciones = atracciones;
+	}
 
 	public ENUMTIPO getPreferencia() {
 		return preferencia;

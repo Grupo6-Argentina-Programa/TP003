@@ -109,12 +109,14 @@ public class PromocionesService {
 	}
 	
 	private void deletePromocion(Integer id) {
-		Promocion promocion = new Promocion(id, null, 0, 0, 0, null);
+		System.out.println("deletePromocion");
 		PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
+		Promocion promocion = promocionDAO.findByID(id);
 		promocionDAO.delete(promocion);
 	}
 
 	private void deleteTipoDeAtraccion(Integer id) {
+		System.out.println("deleteTipoDeAtraccion");
 		TipoDeAtraccionDAO DAO = DAOFactory.getTipoDeAtraccionDAO();
 		TipoDeAtraccion tipodeatraccion = DAO.findByReferenceAndType(id, "Promocion");
 		DAO.delete(tipodeatraccion);

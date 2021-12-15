@@ -77,7 +77,7 @@ public class Promocion implements Comparable<Promocion>, InterfaceModel {
 	public void setCosto(double costo) {
 		this.costoTotal = costo;
 	}
-	
+
 	public double getDuracion() {
 		return duracionTotal;
 	}
@@ -89,7 +89,7 @@ public class Promocion implements Comparable<Promocion>, InterfaceModel {
 	public List<Atraccion> getAtracciones() {
 		return atracciones;
 	}
-	
+
 	public void setAtracciones(List<Atraccion> atracciones) {
 		this.atracciones = atracciones;
 	}
@@ -143,22 +143,30 @@ public class Promocion implements Comparable<Promocion>, InterfaceModel {
 	}
 
 	private void calcularDuracion() {
-		double duracionTotal = 0;
-		for (Atraccion atraccion : this.atracciones) {
-			duracionTotal += atraccion.getDuracion();
+		if (this.atracciones == null) {
+			this.duracionTotal = 0;
+		} else {
+			double duracionTotal = 0;
+			for (Atraccion atraccion : this.atracciones) {
+				duracionTotal += atraccion.getDuracion();
+			}
+			this.duracionTotal = duracionTotal;
 		}
-		this.duracionTotal = duracionTotal;
 	}
 
 	private void buscarPreferencia() {
-		boolean first = true;
-		for (Atraccion atraccion : this.atracciones) {
-			if (first) {
-				this.preferencia = atraccion.getPreferencia();
-				first = false;
-			}
-			if (this.preferencia != atraccion.getPreferencia()) {
-				this.preferencia = ENUMTIPO.SinDefinir;
+		if (this.atracciones == null) {
+			this.preferencia = ENUMTIPO.SinDefinir;
+		} else {
+			boolean first = true;
+			for (Atraccion atraccion : this.atracciones) {
+				if (first) {
+					this.preferencia = atraccion.getPreferencia();
+					first = false;
+				}
+				if (this.preferencia != atraccion.getPreferencia()) {
+					this.preferencia = ENUMTIPO.SinDefinir;
+				}
 			}
 		}
 	}
@@ -233,11 +241,11 @@ public class Promocion implements Comparable<Promocion>, InterfaceModel {
 		return distancia;
 	}
 
-	
 	public boolean isValid() {
 		validate();
 		return errors.isEmpty();
 	}
+
 	public void validate() {
 		errors = new HashMap<String, String>();
 
@@ -247,22 +255,22 @@ public class Promocion implements Comparable<Promocion>, InterfaceModel {
 		if (duracionTotal <= 0) {
 			errors.put("duracionTotal", "Debe ser positivo");
 		}
-		
+
 	}
 
 	public void setNombre(String nombre) {
-		this.nombre=nombre;
-		
+		this.nombre = nombre;
+
 	}
 
 	public void setDescuentoPorcentual(Integer descuentoPorcentual) {
-		this.descuentoPorcentual=descuentoPorcentual;
-		
+		this.descuentoPorcentual = descuentoPorcentual;
+
 	}
 
 	public void setTipoDePromocion(int tipoDePromocion) {
-		this.tipoDePromocion=tipoDePromocion;
-		
+		this.tipoDePromocion = tipoDePromocion;
+
 	}
 
 }

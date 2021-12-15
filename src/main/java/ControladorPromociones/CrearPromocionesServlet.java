@@ -50,6 +50,9 @@ public class CrearPromocionesServlet extends HttpServlet {
 		Integer descuentoPorcentual = Integer.parseInt(req.getParameter("descuentoporcentual"));
 		System.out.println("descuentoPorcentual ->" + descuentoPorcentual);
 		
+		String preferencias = req.getParameter("preferencias");
+		System.out.println("preferencias ->" + preferencias);
+		
 		Integer atraccion1 = Integer.parseInt(req.getParameter("atraccion1"));
 		System.out.println("atraccion1 ->" + atraccion1);
 		
@@ -62,9 +65,8 @@ public class CrearPromocionesServlet extends HttpServlet {
 		System.out.println("cargo todos los valores");
 		System.out.println("posterioremnte creacion");
 		
-		Promocion promocion = null;
+		Promocion promocion = promocionesService.create(nombre, tipoDePromocion, costoTotal, descuentoPorcentual, atraccion1, atraccion2, atraccionP, preferencias);
 		
-		//Promocion promocion = promocionesService.create(nombre, tipoDePromocion, costo, descuentoPorcentual, null );
 		if (promocion.isValid()) {
 			resp.sendRedirect("/TP003/promociones/index.do");
 		} else {

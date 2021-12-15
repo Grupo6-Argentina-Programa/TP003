@@ -154,7 +154,7 @@ public class Promocion implements Comparable<Promocion>, InterfaceModel {
 				first = false;
 			}
 			if (this.preferencia != atraccion.getPreferencia()) {
-				throw new Error("Los Tipos De las Atracciones no coinciden");
+				this.preferencia = ENUMTIPO.SinDefinir;
 			}
 		}
 	}

@@ -51,8 +51,36 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 	@Override
 	public int update(Promocion t) {
-		// NoUtilizado
-		return 0;
+		try {
+			String sql = "UPDATE Promocion SET nombre = ?, tipoDePromocion = ?, costoTotal = ?, descuentoPorcentual = ?, atraccionA = ?, atraccionB = ?, atraccionP = ? WHERE id = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+
+			statement.setString(1, t.getNombre());
+			statement.setInt(2, t.getTipoDePromocion());
+			statement.setDouble(3, t.getCosto());
+			statement.setInt(4, t.getDescuentoPorcentual());
+
+			int auxId;
+			int contador = 5;
+
+			List<Atraccion> atracciones = t.getAtracciones();
+			for (Atraccion i : atracciones) {
+				auxId = i.getId();
+				statement.setInt(contador, auxId);
+				contador++;
+			}
+			if (t.getTipoDePromocion() < 3) {
+				statement.setInt(contador, 0);
+			}
+			statement.setInt(8, t.getId());
+
+			int rows = statement.executeUpdate();
+
+			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
 	}
 
 	@Override

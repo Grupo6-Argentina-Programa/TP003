@@ -40,7 +40,14 @@
 		</div>
 
 		<div class="mb-3">
-			<label for="descuentoPorcentual"
+			<label for="preferencias" class="col-form-label">Preferencias:
+				(Solo valido (" PAISAJE ")|| (" AVENTURA ") || (" DEGUSTACION "))</label> <input
+				type="text" class="form-control" id="name" name="preferencias"
+				required value="${attraction.nombre}">
+		</div>
+
+		<div class="mb-3">
+			<label for="atracciones"
 				class='col-form-label ${promocion.errors.get("atracciones") != null ? "is-invalid" : "" }'>Atraccion
 				1 (Id): </label> <input class="form-control" type="number" id="capacity"
 				name="atraccion1" required value="${promocion.atraccion1}"></input>
@@ -50,7 +57,7 @@
 		</div>
 
 		<div class="mb-3">
-			<label for="descuentoPorcentual"
+			<label for="atracciones"
 				class='col-form-label ${promocion.errors.get("atracciones") != null ? "is-invalid" : "" }'>Atraccion
 				2 (Id): </label> <input class="form-control" type="number" id="capacity"
 				name="atraccion2" required value="${promocion.atraccion2}"></input>
@@ -60,7 +67,7 @@
 		</div>
 
 		<div class="mb-3">
-			<label for="descuentoPorcentual"
+			<label for="atracciones"
 				class='col-form-label ${promocion.errors.get("atracciones") != null ? "is-invalid" : "" }'>Atraccion
 				Plus (Id): (Valido solo para Prom. AxB)</label> <input class="form-control"
 				type="number" id="capacity" name="atraccionP" required

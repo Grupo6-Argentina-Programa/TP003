@@ -242,10 +242,10 @@ public class Promocion implements Comparable<Promocion>, InterfaceModel {
 		errors = new HashMap<String, String>();
 
 		if (costoTotal <= 0) {
-			errors.put("cost", "Debe ser positivo");
+			errors.put("costoTotal", "Debe ser positivo");
 		}
 		if (duracionTotal <= 0) {
-			errors.put("duration", "Debe ser positivo");
+			errors.put("duracionTotal", "Debe ser positivo");
 		}
 		
 	}

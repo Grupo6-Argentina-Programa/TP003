@@ -76,7 +76,7 @@ public class EditPromocionesServlet extends HttpServlet {
 			resp.sendRedirect("/TP003/promociones/index.do");
 		} else {
 			req.setAttribute("promocion", promocion);
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/attractions/edit.jsp");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/promociones/edit.jsp");
 			dispatcher.forward(req, resp);
 		}
 	}

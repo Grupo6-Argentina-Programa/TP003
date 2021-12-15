@@ -40,6 +40,8 @@ public class EditPromocionesServlet extends HttpServlet {
 		
 		System.out.println("llego a servlet");
 		
+		Integer id = Integer.parseInt(req.getParameter("id"));
+		
 		String nombre = req.getParameter("nombre");
 		System.out.println("nombre ->" + nombre);
 		
@@ -66,7 +68,7 @@ public class EditPromocionesServlet extends HttpServlet {
 		
 		System.out.println("cargo todos los valores");
 		
-		Promocion promocion = promocionesService.update(nombre, tipoDePromocion, costoTotal, descuentoPorcentual, atraccion1, atraccion2, atraccionP, preferencias);
+		Promocion promocion = promocionesService.update(id, nombre, tipoDePromocion, costoTotal, descuentoPorcentual, atraccion1, atraccion2, atraccionP, preferencias);
 		
 		System.out.println("posterioremnte actualizacion");
 		

@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Atraccion;
@@ -17,31 +18,41 @@ public class PromocionesService {
 
 	}
 
-	public Promocion create(String nombre, int tipoDePromocion, Double costo, Integer descuentoPorcentual,
-			List<Atraccion> atracciones) {
+	public Promocion create(String nombre, Integer tipoDePromocion, Double costo, Integer descuentoPorcentual,
+			int atraccion1, int atraccion2, int atraccionP, String preferencias) {
 
+		List<Atraccion> atracciones = new ArrayList<>();
+		agreagrAtraccionDeDAO(atracciones, atraccion1);
+		agreagrAtraccionDeDAO(atracciones, atraccion2);
+		if(tipoDePromocion.equals(3))
+			agreagrAtraccionDeDAO(atracciones, atraccionP);
+		
 		Promocion promocion = new Promocion(-1, nombre, tipoDePromocion, costo, descuentoPorcentual, atracciones);
 
 		if (promocion.isValid()) {
-			PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
-			promocionDAO.insert(promocion);
+			crearPromocionEnDAO(promocion);
+			crearTDAenDAO(promocion, preferencias);
 			// XXX: si no devuelve "1", es que hubo más errores
 		}
 
 		return promocion;
 	}
 
-	public Promocion update(Integer id, String nombre, int tipoDePromocion, Double costo, Integer descuentoPorcentual,
-			List<Atraccion> atracciones) {
+	public Promocion update(Integer id, String nombre, Integer tipoDePromocion, Double costoTotal, Integer descuentoPorcentual,
+			int atraccion1, int atraccion2, int atraccionP, String preferencias){
 
 		PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
 		Promocion promocion = promocionDAO.findByID(id);
 
 		promocion.setNombre(nombre);
 		promocion.setTipoDePromocion(tipoDePromocion);
-		promocion.setCosto(costo);
+		promocion.setCosto(costoTotal);
 		promocion.setDescuentoPorcentual(descuentoPorcentual);
-		promocion.agregarAtracciones(atracciones);
+		
+		//buscar atracciones
+		
+		
+		promocion.setNombre(preferencias);
 
 		if (promocion.isValid()) {
 			promocionDAO.update(promocion);
@@ -63,6 +74,28 @@ public class PromocionesService {
 
 ////////////////////////////////////////////////////////////////////////////////
 
+	private List<Atraccion> agreagrAtraccionDeDAO(List<Atraccion> atracciones, int IdAtraccion){
+		AtraccionDAO atracionDAO = DAOFactory.getAtraccionDAO();
+		Atraccion atraccion = atracionDAO.findByID(IdAtraccion);
+		atracciones.add(atraccion);
+		return atracciones;
+	}
+	
+	private void crearPromocionEnDAO(Promocion promocion) {
+		PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
+		promocionDAO.insert(promocion);
+	}
+	
+	private void crearTDAenDAO(Promocion promocion, String preferencias) {
+		PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
+		Promocion promocion1 = promocionDAO.findByPromotionName(promocion.getNombre());
+		
+		TipoDeAtraccionDAO tipodeatraccionDAO = DAOFactory.getTipoDeAtraccionDAO();
+		TipoDeAtraccion tipodeatraccion1 = new TipoDeAtraccion(promocion1.getId(), "Promocion", preferencias);
+		
+		tipodeatraccionDAO.insert(tipodeatraccion1);
+	}
+	
 	private void deletePromocion(Integer id) {
 		Promocion promocion = new Promocion(id, null, 0, 0, 0, null);
 		PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
@@ -74,5 +107,9 @@ public class PromocionesService {
 		TipoDeAtraccion tipodeatraccion = DAO.findByReferenceAndType(id, "Promocion");
 		DAO.delete(tipodeatraccion);
 	}
+	
+
+	
+
 
 }

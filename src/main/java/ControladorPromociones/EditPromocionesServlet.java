@@ -38,9 +38,10 @@ public class EditPromocionesServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("llego a servlet");
+		System.out.println("EditPromocionesServlet");
 		
 		Integer id = Integer.parseInt(req.getParameter("id"));
+		System.out.println(Integer.parseInt(req.getParameter("id")));
 		
 		String nombre = req.getParameter("nombre");
 		System.out.println("nombre ->" + nombre);

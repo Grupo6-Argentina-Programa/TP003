@@ -20,7 +20,7 @@
 		</c:if>
 
 		<form action="/TP003/promociones/edit.do" method="post">
-			<input type="hidden" name="id" value="${attraction.id}">
+			<input type="hidden" name="id" value="${promocion.id}">
 			<jsp:include page="/views/promociones/form.jsp"></jsp:include>
 		</form>
 	</main>

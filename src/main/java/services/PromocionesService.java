@@ -24,9 +24,9 @@ public class PromocionesService {
 		List<Atraccion> atracciones = new ArrayList<>();
 		agreagrAtraccionDeDAO(atracciones, atraccion1);
 		agreagrAtraccionDeDAO(atracciones, atraccion2);
-		if(tipoDePromocion.equals(3))
+		if (tipoDePromocion.equals(3))
 			agreagrAtraccionDeDAO(atracciones, atraccionP);
-		
+
 		Promocion promocion = new Promocion(-1, nombre, tipoDePromocion, costo, descuentoPorcentual, atracciones);
 
 		if (promocion.isValid()) {
@@ -38,17 +38,25 @@ public class PromocionesService {
 		return promocion;
 	}
 
-	public Promocion update(Integer id, String nombre, Integer tipoDePromocion, Double costoTotal, Integer descuentoPorcentual,
-			int atraccion1, int atraccion2, int atraccionP, String preferencias){
+	public Promocion update(Integer id, String nombre, Integer tipoDePromocion, Double costoTotal,
+			Integer descuentoPorcentual, int atraccion1, int atraccion2, int atraccionP, String preferencias) {
 
 		PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
 		Promocion promocion = promocionDAO.findByID(id);
 		
+		System.out.println("update");
+		
+		System.out.println("atraccion1 -> " + atraccion1);
+		System.out.println("atraccion1 -> " + atraccion2);
+		System.out.println("atraccion1 -> " + atraccionP);
+		
+		
 		List<Atraccion> atracciones = new ArrayList<>();
 		agreagrAtraccionDeDAO(atracciones, atraccion1);
 		agreagrAtraccionDeDAO(atracciones, atraccion2);
-		if(tipoDePromocion.equals(3))
+		if (tipoDePromocion.equals(3))
 			agreagrAtraccionDeDAO(atracciones, atraccionP);
+		System.out.println(atracciones);
 
 		promocion.setNombre(nombre);
 		promocion.setTipoDePromocion(tipoDePromocion);
@@ -77,37 +85,37 @@ public class PromocionesService {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-	private List<Atraccion> agreagrAtraccionDeDAO(List<Atraccion> atracciones, int IdAtraccion){
+	private List<Atraccion> agreagrAtraccionDeDAO(List<Atraccion> atracciones, int IdAtraccion) {
 		AtraccionDAO atracionDAO = DAOFactory.getAtraccionDAO();
 		Atraccion atraccion = atracionDAO.findByID(IdAtraccion);
 		atracciones.add(atraccion);
 		return atracciones;
 	}
-	
+
 	private void crearPromocionEnDAO(Promocion promocion) {
 		PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
 		promocionDAO.insert(promocion);
 	}
-	
+
 	private void crearTDAenDAO(Promocion promocion, String preferencias) {
 		PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
 		Promocion promocion1 = promocionDAO.findByPromotionName(promocion.getNombre());
-		
+
 		TipoDeAtraccionDAO tipodeatraccionDAO = DAOFactory.getTipoDeAtraccionDAO();
 		TipoDeAtraccion tipodeatraccion1 = new TipoDeAtraccion(promocion1.getId(), "Promocion", preferencias);
-		
+
 		tipodeatraccionDAO.insert(tipodeatraccion1);
 	}
-	
+
 	private void actualizarTDAenDAO(Integer idDePromocion, String tipoDeAtraccion) {
 		TipoDeAtraccionDAO tipodeatraccionDAO = DAOFactory.getTipoDeAtraccionDAO();
 		TipoDeAtraccion tipodeatraccion1 = tipodeatraccionDAO.findByReferenceAndType(idDePromocion, "Promocion");
-		
+
 		tipodeatraccion1.asignarPreferencia(tipoDeAtraccion);
-		
+
 		tipodeatraccionDAO.update(tipodeatraccion1);
 	}
-	
+
 	private void deletePromocion(Integer id) {
 		System.out.println("deletePromocion");
 		PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
@@ -121,9 +129,5 @@ public class PromocionesService {
 		TipoDeAtraccion tipodeatraccion = DAO.findByReferenceAndType(id, "Promocion");
 		DAO.delete(tipodeatraccion);
 	}
-	
-
-	
-
 
 }

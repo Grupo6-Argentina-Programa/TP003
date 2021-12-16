@@ -44,19 +44,11 @@ public class PromocionesService {
 		PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
 		Promocion promocion = promocionDAO.findByID(id);
 		
-		System.out.println("update");
-		
-		System.out.println("atraccion1 -> " + atraccion1);
-		System.out.println("atraccion1 -> " + atraccion2);
-		System.out.println("atraccion1 -> " + atraccionP);
-		
-		
 		List<Atraccion> atracciones = new ArrayList<>();
 		agreagrAtraccionDeDAO(atracciones, atraccion1);
 		agreagrAtraccionDeDAO(atracciones, atraccion2);
 		if (tipoDePromocion.equals(3))
 			agreagrAtraccionDeDAO(atracciones, atraccionP);
-		System.out.println(atracciones);
 
 		promocion.setNombre(nombre);
 		promocion.setTipoDePromocion(tipoDePromocion);
